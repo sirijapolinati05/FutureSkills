@@ -366,6 +366,7 @@ export const MyProfile: React.FC = () => {
           cursor: pointer;
           font-size: 0.85rem;
           font-weight: 600;
+          white-space: nowrap;
           background: #f8fafc;
           box-shadow: inset 4px 4px 8px rgba(0,0,0,0.15), inset -4px -4px 8px rgba(255,255,255,0.9);
           transition: all 0.3s ease;
