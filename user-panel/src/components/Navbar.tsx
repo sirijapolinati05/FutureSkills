@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import skillToWealthLogo from '../assets/Skill-To-Wealth.png';
 import { Menu, Bell } from 'lucide-react';
 
 interface NavbarProps {
@@ -26,25 +27,37 @@ const Navbar: React.FC<NavbarProps> = ({ setMobileOpen }) => {
         zIndex: 20
       }}
     >
-      <button
-        className="hide-desktop"
-        onClick={() => setMobileOpen(true)}
-        style={{
-          border: 'none',
-          background: 'transparent',
-          cursor: 'pointer',
-          display: 'none',
-          color: '#334155'
-        }}
-        id="menu-toggle-btn"
-      >
-        <Menu size={24} />
-      </button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
+        <button
+          className="hide-desktop"
+          onClick={() => setMobileOpen(true)}
+          style={{
+            border: 'none',
+            background: 'transparent',
+            cursor: 'pointer',
+            display: 'none',
+            color: '#334155'
+          }}
+          id="menu-toggle-btn"
+        >
+          <Menu size={24} />
+        </button>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <span style={{ fontSize: '1rem', fontWeight: 600, color: '#334155' }}>
+        <span className="navbar-desktop-greeting" style={{ fontSize: '1rem', fontWeight: 600, color: '#334155' }}>
           Welcome back, {user?.name}!
         </span>
+
+        <img
+          className="navbar-mobile-logo"
+          src={skillToWealthLogo}
+          alt="Skill To Wealth"
+          style={{
+            height: '145px',
+            width: 'auto',
+            objectFit: 'contain',
+            display: 'none'
+          }}
+        />
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>

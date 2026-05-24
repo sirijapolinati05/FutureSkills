@@ -241,6 +241,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 900px) {
+  .navbar-desktop-greeting {
+    display: none !important;
+  }
+
+  .navbar-mobile-logo {
+    display: block !important;
+  }
+
   .dashboard-greeting-title {
     font-size: 1rem !important;
     white-space: nowrap;
