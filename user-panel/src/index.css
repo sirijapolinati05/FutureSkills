@@ -235,6 +235,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Responsive utilities */
 @media (min-width: 769px) {
+  .navbar-mobile-logo {
+    display: none !important;
+  }
+
   .dashboard-stats-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -246,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .navbar-mobile-logo {
-    display: block !important;
+    display: block;
   }
 
   .dashboard-greeting-title {

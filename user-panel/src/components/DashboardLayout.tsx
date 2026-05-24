@@ -51,7 +51,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
         }}
         className="main-content-pane"
       >
-        <Navbar setMobileOpen={setMobileOpen} />
+        <Navbar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
         <main style={{ padding: '2rem', flex: 1, overflowY: 'auto' }}>
           {children}

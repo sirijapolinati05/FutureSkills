@@ -5,10 +5,11 @@ import skillToWealthLogo from '../assets/Skill-To-Wealth.png';
 import { Menu, Bell } from 'lucide-react';
 
 interface NavbarProps {
+  mobileOpen: boolean;
   setMobileOpen: (open: boolean) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ setMobileOpen }) => {
+const Navbar: React.FC<NavbarProps> = ({ mobileOpen, setMobileOpen }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -55,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ setMobileOpen }) => {
             height: '145px',
             width: 'auto',
             objectFit: 'contain',
-            display: 'none'
+            display: mobileOpen ? 'none' : 'block'
           }}
         />
       </div>
