@@ -91,7 +91,7 @@ export const UserDashboard: React.FC = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       <div
-        className="three-d-card"
+        className="three-d-card dashboard-user-banner"
         style={{
           padding: '1.15rem 1.5rem',
           display: 'flex',
@@ -113,7 +113,7 @@ export const UserDashboard: React.FC = () => {
           e.currentTarget.style.boxShadow = `8px 8px 16px rgba(0,0,0,0.12), -8px -8px 16px rgba(255,255,255,0.88), inset 2px 2px 4px rgba(255,255,255,0.75), inset -2px -2px 4px rgba(0,0,0,0.08)`;
         }}
       >
-        <h2 style={{ fontSize: '1.2rem', color: '#1e293b', fontWeight: 700, fontFamily: 'var(--font-heading)', textShadow: '0 1px 0 rgba(255,255,255,0.8)' }}>
+        <h2 className="dashboard-greeting-title" style={{ fontSize: '1.2rem', color: '#1e293b', fontWeight: 700, fontFamily: 'var(--font-heading)', textShadow: '0 1px 0 rgba(255,255,255,0.8)' }}>
           Good Morning, {user?.name}!
         </h2>
 
@@ -148,7 +148,7 @@ export const UserDashboard: React.FC = () => {
       </div>
 
       <div
-        className="three-d-card"
+        className="three-d-card dashboard-user-banner"
         style={{
           background: 'linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%)',
           border: '1px solid #7dd3fc',
@@ -174,8 +174,9 @@ export const UserDashboard: React.FC = () => {
       >
         <div style={{ position: 'absolute', right: '-10%', top: '-20%', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(56, 189, 248, 0.1)' }} />
         <div style={{ position: 'absolute', left: '-4%', bottom: '-18%', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(255,255,255,0.22)' }} />
-        <div style={{ position: 'relative' }}>
+        <div className="dashboard-user-banner-avatar" style={{ position: 'relative' }}>
           <img
+            className="dashboard-user-banner-image"
             src={user?.kycDetails?.documentUrl || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80"}
             style={{
               width: '90px',
@@ -194,8 +195,8 @@ export const UserDashboard: React.FC = () => {
             }}
           />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <h2 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#1d4ed8', margin: 0 }}>{user?.name}</h2>
+        <div className="dashboard-user-banner-content" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <h2 className="dashboard-user-banner-name" style={{ fontSize: '1.75rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#1d4ed8', margin: 0 }}>{user?.name}</h2>
           <div>
             <span
               style={{
