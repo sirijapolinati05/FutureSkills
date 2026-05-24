@@ -1,0 +1,179 @@
+{
+  "users": [
+    {
+      "id": "user-admin",
+      "email": "admin@gmail.com",
+      "name": "Admin User",
+      "phone": "9999999999",
+      "role": "admin",
+      "packageName": "N/A",
+      "sponsorCode": "ADMIN-01",
+      "referredBy": "",
+      "status": "active",
+      "kycStatus": "approved",
+      "createdAt": "2026-05-23T08:16:50.914Z"
+    },
+    {
+      "id": "user-standard",
+      "email": "login@gmail.com",
+      "name": "Mamidala Sujith",
+      "phone": "9502014791",
+      "role": "user",
+      "packageName": "Platinum",
+      "sponsorCode": "AZ-2396",
+      "referredBy": "ADMIN-01",
+      "status": "active",
+      "kycStatus": "approved",
+      "kycDetails": {
+        "accountHolder": "Mamidala Sujith",
+        "bankName": "State Bank of India",
+        "accountNumber": "32104589213",
+        "ifscCode": "SBIN0012345"
+      },
+      "createdAt": "2026-05-23T08:16:50.918Z"
+    }
+  ],
+  "earnings": {
+    "today": 0,
+    "sevenDays": 77,
+    "thirtyDays": 3646,
+    "allTime": 415104,
+    "passive": 71604,
+    "pending": 326,
+    "industry": 415104
+  },
+  "chartData": [
+    {
+      "date": "17 May",
+      "amount": 50
+    },
+    {
+      "date": "18 May",
+      "amount": 120
+    },
+    {
+      "date": "19 May",
+      "amount": 80
+    },
+    {
+      "date": "20 May",
+      "amount": 200
+    },
+    {
+      "date": "21 May",
+      "amount": 150
+    },
+    {
+      "date": "22 May",
+      "amount": 310
+    },
+    {
+      "date": "23 May",
+      "amount": 77
+    }
+  ],
+  "courses": [
+    {
+      "id": "course-1",
+      "title": "Graphic Design Masterclass",
+      "category": "Design",
+      "thumbnail": "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&auto=format&fit=crop&q=60",
+      "duration": "12h 30m",
+      "lessonsCount": 24,
+      "requiredPackage": "Classic Package",
+      "description": "Learn Adobe Photoshop, Illustrator, and Canva from absolute scratch to earn freelance income.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+      "id": "course-2",
+      "title": "Affiliate Marketing Secrets",
+      "category": "Marketing",
+      "thumbnail": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60",
+      "duration": "8h 15m",
+      "lessonsCount": 15,
+      "requiredPackage": "Heroic Package",
+      "description": "Master lead generation, sales closing, and automated funnel creation for online marketing.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+      "id": "course-3",
+      "title": "Website Development (No-Code)",
+      "category": "Development",
+      "thumbnail": "https://images.unsplash.com/photo-1547658719-da2b81169d42?w=500&auto=format&fit=crop&q=60",
+      "duration": "15h 45m",
+      "lessonsCount": 30,
+      "requiredPackage": "Prime Package",
+      "description": "Build premium responsive websites for international clients using WordPress and Elementor.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+    }
+  ],
+  "team": [
+    {
+      "id": "team-1",
+      "name": "Rohan Mehra",
+      "email": "rohan.mehra@gmail.com",
+      "phone": "9876543210",
+      "packageName": "Classic Package",
+      "status": "active",
+      "level": 1,
+      "joinedDate": "2026-05-18"
+    },
+    {
+      "id": "team-2",
+      "name": "Anjali Sharma",
+      "email": "anjali.sharma@gmail.com",
+      "phone": "9123456780",
+      "packageName": "Prime Package",
+      "status": "active",
+      "level": 1,
+      "joinedDate": "2026-05-20"
+    },
+    {
+      "id": "team-3",
+      "name": "Karan Patel",
+      "email": "karan.patel@gmail.com",
+      "phone": "9888877776",
+      "packageName": "Platinum Package",
+      "status": "active",
+      "level": 2,
+      "joinedDate": "2026-05-21"
+    }
+  ],
+  "liveOffers": [
+    {
+      "id": "offer-1",
+      "tag": "HOT OFFER",
+      "title": "Dubai Leadership Summit 2026",
+      "desc": "Accumulate ₹10,00,000 in total sales before August 2026 to win a fully paid 4-day Dubai package."
+    }
+  ],
+  "training": [
+    {
+      "id": "t-1",
+      "title": "Affiliate Marketing Kickoff",
+      "duration": "45 mins",
+      "desc": "How to setup your profile, links, and find your first 10 leads."
+    },
+    {
+      "id": "t-2",
+      "title": "Closing High Ticket Clients",
+      "duration": "1 hr 15 mins",
+      "desc": "Step-by-step phone script to close premium packages."
+    },
+    {
+      "id": "t-3",
+      "title": "Facebook Ads Lead Gen",
+      "duration": "55 mins",
+      "desc": "Running cost-efficient campaign setups for lead funnels."
+    }
+  ],
+  "webinars": [
+    {
+      "id": "web-1",
+      "title": "Weekly Commission Boosting Frameworks",
+      "speaker": "Mamidala Sujith (Platinum Achiever)",
+      "time": "Sunday at 7:00 PM IST",
+      "url": "#"
+    }
+  ]
+}

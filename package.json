@@ -1,0 +1,17 @@
+{
+  "name": "achieverzon-future-skills",
+  "version": "1.0.0",
+  "description": "AchieverZon (powered by FutureSkills) - User & Admin Panels",
+  "scripts": {
+    "install:all": "npm install --prefix user-panel && npm install --prefix admin-panel",
+    "dev": "concurrently \"node server.js\" \"npm run dev --prefix user-panel\" \"npm run dev --prefix admin-panel\"",
+    "build": "npm run build --prefix user-panel && npm run build --prefix admin-panel"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
