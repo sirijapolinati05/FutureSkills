@@ -84,14 +84,16 @@ export const AffiliateLink: React.FC = () => {
             }}>
               <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#475569' }}>{item.label}</span>
               
-              <div className="affiliate-input-row" style={{ display: 'flex', gap: '0.5rem' }}>
+              <div className="affiliate-input-row" style={{ display: 'flex', gap: '0.5rem', width: '100%', alignItems: 'stretch' }}>
                 <input
                   type="text"
                   value={item.val}
                   readOnly
                   className="affiliate-input"
                   style={{
-                    flex: 1,
+                    flex: '1 1 auto',
+                    minWidth: 0,
+                    width: '100%',
                     padding: '0.85rem 1rem',
                     borderRadius: '12px',
                     border: '1px solid #e2e8f0',
@@ -133,6 +135,7 @@ export const AffiliateLink: React.FC = () => {
                     fontSize: '0.85rem',
                     transition: 'all 0.25s ease',
                     minWidth: '96px',
+                    flexShrink: 0,
                     boxShadow: copiedKey === item.key
                       ? '5px 5px 12px rgba(34,197,94,0.2), -4px -4px 10px rgba(255,255,255,0.85), inset 2px 2px 4px rgba(255,255,255,0.6)'
                       : '6px 6px 12px rgba(15,23,42,0.22), -4px -4px 10px rgba(255,255,255,0.18), inset 2px 2px 4px rgba(255,255,255,0.25)',
@@ -305,6 +308,13 @@ export const AffiliateLink: React.FC = () => {
           vertical-align: middle;
         }
 
+        .affiliate-table tbody tr:hover td {
+          background: #f0f9ff;
+          box-shadow:
+            inset 5px 5px 10px rgba(0, 0, 0, 0.15),
+            inset -5px -5px 10px rgba(255, 255, 255, 0.95);
+        }
+
         /* Commission Table */
         .affiliate-commission-table th:nth-child(2),
         .affiliate-commission-table th:nth-child(3),
@@ -338,6 +348,28 @@ export const AffiliateLink: React.FC = () => {
         }
 
         @media (max-width: 768px) {
+          .affiliate-card {
+            gap: 1.25rem !important;
+          }
+
+          .affiliate-item {
+            padding-bottom: 1.25rem !important;
+          }
+
+          .affiliate-input-row {
+            gap: 0.45rem !important;
+          }
+
+          .affiliate-input {
+            padding: 0.8rem 0.85rem !important;
+            font-size: 0.84rem !important;
+          }
+
+          .affiliate-copy-button {
+            min-width: 84px !important;
+            padding: 0.8rem 0.95rem !important;
+          }
+
           .affiliate-table {
             min-width: 720px;
           }
@@ -345,6 +377,24 @@ export const AffiliateLink: React.FC = () => {
           .affiliate-upgrade-table th:first-child,
           .affiliate-upgrade-table td:first-child {
             min-width: 240px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .affiliate-input-row {
+            gap: 0.4rem !important;
+          }
+
+          .affiliate-input {
+            padding: 0.78rem 0.75rem !important;
+            font-size: 0.8rem !important;
+          }
+
+          .affiliate-copy-button {
+            min-width: 76px !important;
+            padding: 0.78rem 0.8rem !important;
+            font-size: 0.78rem !important;
+            gap: 0.35rem !important;
           }
         }
       `}</style>
