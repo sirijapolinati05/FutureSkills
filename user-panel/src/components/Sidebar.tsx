@@ -3,6 +3,7 @@ import skillToWealthLogo from '../assets/Skill-To-Wealth.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
+  Briefcase,
   BookOpen,
   ChevronRight,
   FileText,
@@ -43,6 +44,8 @@ const sidebarItems: SidebarItem[] = [
   { name: 'Training', route: '/training', icon: <Video size={18} /> },
   { name: 'Webinars', route: '/webinars', icon: <Video size={18} /> },
   { name: 'Live Offers', route: '/live-offers', icon: <MonitorPlay size={18} /> },
+  { name: 'Freelancing', route: '/freelancing', icon: <Briefcase size={18} /> },
+  { name: 'Community Links', route: '/community', icon: <Users size={18} /> },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ setMobileOpen }) => {

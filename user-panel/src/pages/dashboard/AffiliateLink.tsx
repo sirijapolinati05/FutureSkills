@@ -12,39 +12,32 @@ export const AffiliateLink: React.FC = () => {
   const affiliateItems = [
     { label: 'Sponsor Code', val: sponsor, key: 'sponsor' },
     { label: 'Common Link', val: `${baseUrl}?ref=${sponsor}`, key: 'common' },
-    { label: 'Classic Package', val: `${baseUrl}?pkg=1&ref=${sponsor}`, key: 'pkg1' },
-    { label: 'Heroic Package', val: `${baseUrl}?pkg=2&ref=${sponsor}`, key: 'pkg2' },
-    { label: 'Prime Package', val: `${baseUrl}?pkg=3&ref=${sponsor}`, key: 'pkg3' },
-    { label: 'Crystal Package', val: `${baseUrl}?pkg=4&ref=${sponsor}`, key: 'pkg4' },
-    { label: 'Platinum Package', val: `${baseUrl}?pkg=5&ref=${sponsor}`, key: 'pkg5' },
-    { label: 'Premium Package', val: `${baseUrl}?pkg=6&ref=${sponsor}`, key: 'pkg6' },
+    { label: 'Starter Package', val: `${baseUrl}?pkg=1&ref=${sponsor}`, key: 'pkg1' },
+    { label: 'Advanced Package', val: `${baseUrl}?pkg=2&ref=${sponsor}`, key: 'pkg2' },
+    { label: 'Pro Package', val: `${baseUrl}?pkg=3&ref=${sponsor}`, key: 'pkg3' },
+    { label: 'Elite Package', val: `${baseUrl}?pkg=4&ref=${sponsor}`, key: 'pkg4' },
+    { label: 'Premium Package', val: `${baseUrl}?pkg=5&ref=${sponsor}`, key: 'pkg5' },
   ];
 
   const commissionChart = [
-    { packageName: 'Classic Package', price: '299', active: '240', passive: '24' },
-    { packageName: 'Heroic Package', price: '549', active: '420', passive: '42' },
-    { packageName: 'Prime Package', price: '1199', active: '900', passive: '90' },
-    { packageName: 'Crystal Package', price: '2299', active: '1700', passive: '170' },
-    { packageName: 'Platinum Package', price: '5499', active: '4200', passive: '420' },
-    { packageName: 'Premium Package', price: '11999', active: '8000', passive: '800' },
+    { packageName: 'Starter Package', price: '299', active: '240', passive: '24' },
+    { packageName: 'Advanced Package', price: '599', active: '450', passive: '45' },
+    { packageName: 'Pro Package', price: '899', active: '650', passive: '65' },
+    { packageName: 'Elite Package', price: '1299', active: '950', passive: '95' },
+    { packageName: 'Premium Package', price: '3999', active: '2800', passive: '280' },
   ];
 
   const upgradeChart = [
-    { packageName: 'Classic Package - Heroic Package', price: '250', active: '180', passive: '18' },
-    { packageName: 'Classic Package - Prime Package', price: '900', active: '630', passive: '63' },
-    { packageName: 'Classic Package - Crystal Package', price: '2000', active: '1400', passive: '140' },
-    { packageName: 'Classic Package - Platinum Package', price: '5200', active: '3640', passive: '364' },
-    { packageName: 'Heroic Package - Prime Package', price: '650', active: '460', passive: '46' },
-    { packageName: 'Heroic Package - Crystal Package', price: '1750', active: '1220', passive: '122' },
-    { packageName: 'Heroic Package - Platinum Package', price: '4950', active: '3460', passive: '346' },
-    { packageName: 'Prime Package - Crystal Package', price: '1100', active: '770', passive: '77' },
-    { packageName: 'Prime Package - Platinum Package', price: '4300', active: '3000', passive: '300' },
-    { packageName: 'Crystal Package - Platinum Package', price: '3200', active: '2240', passive: '224' },
-    { packageName: 'Classic Package - Premium Package', price: '8190', active: '5320', passive: '532' },
-    { packageName: 'Heroic Package - Premium Package', price: '8020', active: '5180', passive: '518' },
-    { packageName: 'Prime Package - Premium Package', price: '10800', active: '7000', passive: '700' },
-    { packageName: 'Crystal Package - Premium Package', price: '9700', active: '6300', passive: '630' },
-    { packageName: 'Platinum Package - Premium Package', price: '6500', active: '4200', passive: '420' },
+    { packageName: 'Starter → Advanced', price: '300', active: '210', passive: '21' },
+    { packageName: 'Starter → Pro', price: '600', active: '420', passive: '42' },
+    { packageName: 'Starter → Elite', price: '1000', active: '700', passive: '70' },
+    { packageName: 'Starter → Premium', price: '3700', active: '2560', passive: '256' },
+    { packageName: 'Advanced → Pro', price: '300', active: '210', passive: '21' },
+    { packageName: 'Advanced → Elite', price: '700', active: '490', passive: '49' },
+    { packageName: 'Advanced → Premium', price: '3400', active: '2380', passive: '238' },
+    { packageName: 'Pro → Elite', price: '400', active: '280', passive: '28' },
+    { packageName: 'Pro → Premium', price: '3100', active: '2170', passive: '217' },
+    { packageName: 'Elite → Premium', price: '2700', active: '1890', passive: '189' },
   ];
 
   const handleCopy = (val: string, key: string) => {
@@ -164,7 +157,7 @@ export const AffiliateLink: React.FC = () => {
         })}
       </div>
 
-      {/* Commission Chart */}
+      {/* Commission Chart - Only 5 Packages */}
       <div className="affiliate-table-card">
         <div className="affiliate-table-card-header">
           <h3>Commission Chart</h3>
@@ -184,9 +177,9 @@ export const AffiliateLink: React.FC = () => {
               {commissionChart.map((row) => (
                 <tr key={row.packageName}>
                   <td>{row.packageName}</td>
-                  <td>{row.price}</td>
-                  <td>{row.active}</td>
-                  <td>{row.passive}</td>
+                  <td>₹{row.price}</td>
+                  <td>₹{row.active}</td>
+                  <td>₹{row.passive}</td>
                 </tr>
               ))}
             </tbody>
@@ -194,17 +187,17 @@ export const AffiliateLink: React.FC = () => {
         </div>
       </div>
 
-      {/* Upgrade Commission Chart */}
+      {/* Upgrade Commission Chart - Only 5 Packages */}
       <div className="affiliate-table-card">
         <div className="affiliate-table-card-header">
           <h3>Upgrade Commission Chart</h3>
-          <p>Package upgrade commission comparison table.</p>
+          <p>Package upgrade commission comparison.</p>
         </div>
         <div className="affiliate-table-wrap">
           <table className="affiliate-table affiliate-upgrade-table">
             <thead>
               <tr>
-                <th>Package</th>
+                <th>Upgrade From → To</th>
                 <th>Price</th>
                 <th>Active</th>
                 <th>Passive</th>
@@ -214,9 +207,9 @@ export const AffiliateLink: React.FC = () => {
               {upgradeChart.map((row) => (
                 <tr key={row.packageName}>
                   <td>{row.packageName}</td>
-                  <td>{row.price}</td>
-                  <td>{row.active}</td>
-                  <td>{row.passive}</td>
+                  <td>₹{row.price}</td>
+                  <td>₹{row.active}</td>
+                  <td>₹{row.passive}</td>
                 </tr>
               ))}
             </tbody>
@@ -249,20 +242,16 @@ export const AffiliateLink: React.FC = () => {
         .affiliate-table-card-header p {
           margin: 0.35rem 0 0;
           font-size: 0.88rem;
-          color: #64748b;
+          color: '#64748b';
         }
 
         .affiliate-table-wrap {
           padding: 1.35rem;
           overflow-x: auto;
-          overflow-y: visible;
-          max-height: none;
-          /* Scrollbar Hide */
-          -ms-overflow-style: none;      /* IE and Edge */
-          scrollbar-width: none;         /* Firefox */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
 
-        /* Chrome, Safari, Opera */
         .affiliate-table-wrap::-webkit-scrollbar {
           display: none;
         }
@@ -274,12 +263,6 @@ export const AffiliateLink: React.FC = () => {
           border-spacing: 8px 12px;
         }
 
-        .affiliate-table thead {
-          position: sticky;
-          top: 0;
-          z-index: 10;
-        }
-
         .affiliate-table th {
           padding: 1rem 1rem;
           background: linear-gradient(180deg, #0284c7, #0369a1);
@@ -287,11 +270,7 @@ export const AffiliateLink: React.FC = () => {
           font-weight: 800;
           text-transform: uppercase;
           text-align: center;
-          position: sticky;
-          top: 0;
-          z-index: 11;
           border-radius: 16px;
-          vertical-align: middle;
         }
 
         .affiliate-table td {
@@ -300,101 +279,24 @@ export const AffiliateLink: React.FC = () => {
           color: #111827;
           font-weight: 500;
           border-radius: 18px;
-          box-shadow: 
-            inset 5px 5px 10px rgba(0, 0, 0, 0.15), 
-            inset -5px -5px 10px rgba(255, 255, 255, 0.95);
-          transition: all 0.3s ease;
+          box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.15), 
+                      inset -5px -5px 10px rgba(255, 255, 255, 0.95);
           text-align: center;
-          vertical-align: middle;
         }
 
         .affiliate-table tbody tr:hover td {
           background: #f0f9ff;
-          box-shadow:
-            inset 5px 5px 10px rgba(0, 0, 0, 0.15),
-            inset -5px -5px 10px rgba(255, 255, 255, 0.95);
         }
 
-        /* Commission Table */
-        .affiliate-commission-table th:nth-child(2),
-        .affiliate-commission-table th:nth-child(3),
-        .affiliate-commission-table th:nth-child(4),
-        .affiliate-commission-table td:nth-child(2),
-        .affiliate-commission-table td:nth-child(3),
-        .affiliate-commission-table td:nth-child(4) {
-          min-width: 90px;
-          max-width: 110px;
-        }
-
-        /* Upgrade Table - Package Column */
         .affiliate-upgrade-table th:first-child,
         .affiliate-upgrade-table td:first-child {
-          min-width: 260px;
-          white-space: nowrap;
-          overflow: visible;
-          text-overflow: unset;
-        }
-
-        .affiliate-table thead th:first-child,
-        .affiliate-table tbody td:first-child {
-          border-top-left-radius: 18px;
-          border-bottom-left-radius: 18px;
-        }
-
-        .affiliate-table thead th:last-child,
-        .affiliate-table tbody td:last-child {
-          border-top-right-radius: 18px;
-          border-bottom-right-radius: 18px;
+          min-width: 240px;
+          text-align: left;
         }
 
         @media (max-width: 768px) {
-          .affiliate-card {
-            gap: 1.25rem !important;
-          }
-
-          .affiliate-item {
-            padding-bottom: 1.25rem !important;
-          }
-
-          .affiliate-input-row {
-            gap: 0.45rem !important;
-          }
-
-          .affiliate-input {
-            padding: 0.8rem 0.85rem !important;
-            font-size: 0.84rem !important;
-          }
-
-          .affiliate-copy-button {
-            min-width: 84px !important;
-            padding: 0.8rem 0.95rem !important;
-          }
-
           .affiliate-table {
-            min-width: 720px;
-          }
-
-          .affiliate-upgrade-table th:first-child,
-          .affiliate-upgrade-table td:first-child {
-            min-width: 240px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .affiliate-input-row {
-            gap: 0.4rem !important;
-          }
-
-          .affiliate-input {
-            padding: 0.78rem 0.75rem !important;
-            font-size: 0.8rem !important;
-          }
-
-          .affiliate-copy-button {
-            min-width: 76px !important;
-            padding: 0.78rem 0.8rem !important;
-            font-size: 0.78rem !important;
-            gap: 0.35rem !important;
+            min-width: 680px;
           }
         }
       `}</style>

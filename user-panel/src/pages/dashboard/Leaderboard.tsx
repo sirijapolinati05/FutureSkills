@@ -1,5 +1,5 @@
 import React from 'react';
-import { Crown, Award, TrendingUp, Calendar, Users } from 'lucide-react';
+import { Award, TrendingUp, Calendar, Users } from 'lucide-react';
 
 export const Leaderboard: React.FC = () => {
   const todayLeaders = [
@@ -100,23 +100,9 @@ export const Leaderboard: React.FC = () => {
                   border: '5px solid white',
                   boxShadow: '0 6px 15px rgba(0,0,0,0.25)',
                   position: 'relative',
-                  zIndex: 1
+                  zIndex: 2
                 }}
               />
-              
-              <div style={{ 
-                position: 'absolute', 
-                top: '-28px', 
-                left: '50%', 
-                transform: 'translateX(-50%)',
-                zIndex: 20 
-              }}>
-                <Crown
-                  size={index === 0 ? 50 : 42}
-                  color={leader.crown === 'gold' ? '#fbbf24' : leader.crown === 'rose' ? '#f472b6' : '#94a3b8'}
-                  fill={leader.crown === 'gold' ? '#fbbf24' : leader.crown === 'rose' ? '#f472b6' : '#94a3b8'}
-                />
-              </div>
             </div>
 
             <div style={{
