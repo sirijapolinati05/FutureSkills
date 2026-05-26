@@ -1,25 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { localDb, Course } from '../../db/localDb';
-import { Play, Lock, BookOpen, Clock, AlertTriangle } from 'lucide-react';
+import { Play, BookOpen, Clock } from 'lucide-react';
+import VideoEditingImg from '../../assets/Video-Editing.jpeg';
+import FacebookAdsImg from '../../assets/Facebook-Ads.jpeg';
+import GoogleAdsenseImg from '../../assets/Google-Adsense.jpeg';
+import SEOImg from '../../assets/SEO.jpeg';
+import EmailMarketingImg from '../../assets/Email-Marketing.jpeg';
+import CopyrightMasteryImg from '../../assets/Copyright-Mastery.jpeg';
 
 export const MyCourses: React.FC = () => {
   const { user } = useAuth();
   const [courses, setCourses] = useState<Course[]>([]);
   const [activeVideo, setActiveVideo] = useState<Course | null>(null);
 
+  const extraCourses: Course[] = [
+    {
+      id: 'course-video-editing',
+      title: 'Video Editing Blueprint',
+      category: 'Design',
+      thumbnail: VideoEditingImg,
+      duration: '9h 20m',
+      lessonsCount: 18,
+      requiredPackage: 'Classic Package',
+      description: 'Short-form and long-form editing workflow with cinematic cuts, text hooks, and export settings.',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    },
+    {
+      id: 'course-facebook-ads',
+      title: 'Facebook Ads Performance Course',
+      category: 'Marketing',
+      thumbnail: FacebookAdsImg,
+      duration: '11h 10m',
+      lessonsCount: 22,
+      requiredPackage: 'Heroic Package',
+      description: 'Audience targeting, campaign setup, creative testing, and scaling strategies for consistent leads.',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    },
+    {
+      id: 'course-google-adsense',
+      title: 'Google Adsense Revenue System',
+      category: 'Business',
+      thumbnail: GoogleAdsenseImg,
+      duration: '7h 35m',
+      lessonsCount: 14,
+      requiredPackage: 'Prime Package',
+      description: 'Learn niche content strategy, site monetization, and Adsense optimization for passive income.',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    },
+    {
+      id: 'course-seo',
+      title: 'SEO Ranking Masterclass',
+      category: 'Marketing',
+      thumbnail: SEOImg,
+      duration: '13h 05m',
+      lessonsCount: 27,
+      requiredPackage: 'Platinum Package',
+      description: 'Master on-page SEO, keyword clusters, technical audits, and ranking improvements.',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    },
+    {
+      id: 'course-email-marketing',
+      title: 'Email Marketing Automation',
+      category: 'Business',
+      thumbnail: EmailMarketingImg,
+      duration: '10h 15m',
+      lessonsCount: 19,
+      requiredPackage: 'Premium Package',
+      description: 'Build welcome flows, promo sequences, and re-engagement automations that convert.',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    },
+    {
+      id: 'course-copyright-mastery',
+      title: 'Copyright Mastery for Creators',
+      category: 'Development',
+      thumbnail: CopyrightMasteryImg,
+      duration: '6h 45m',
+      lessonsCount: 12,
+      requiredPackage: 'Premium Package',
+      description: 'Protect digital assets, understand fair use, and use copyright-safe content in client work.',
+      videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    },
+  ];
+
   useEffect(() => {
-    setCourses(localDb.getCourses());
+    setCourses(extraCourses);
   }, []);
 
   const getPackageLevel = (pkgName: string): number => {
     const levels: Record<string, number> = {
       'Classic Package': 1,
+      Classic: 1,
       'Heroic Package': 2,
+      Heroic: 2,
       'Prime Package': 3,
+      Prime: 3,
       'Crystal Package': 4,
+      Crystal: 4,
       'Platinum Package': 5,
+      Platinum: 5,
       'Premium Package': 6,
+      Premium: 6,
     };
     return levels[pkgName] || 0;
   };
@@ -187,25 +268,6 @@ export const MyCourses: React.FC = () => {
                   />
                 </div>
 
-                {/* Locked Overlay */}
-                {!hasAccess && (
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    backgroundColor: 'rgba(15, 23, 42, 0.78)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    gap: '0.6rem',
-                  }}>
-                    <Lock size={32} color="#f59e0b" />
-                    <span style={{ fontSize: '1rem', fontWeight: 700 }}>Locked Content</span>
-                    <span style={{ fontSize: '0.8rem', opacity: 0.9 }}>Requires {course.requiredPackage}</span>
-                  </div>
-                )}
-
                 {/* Category Badge */}
                 <span style={{
                   position: 'absolute',
@@ -297,7 +359,7 @@ export const MyCourses: React.FC = () => {
                     }}
                   >
                     <Play size={18} fill="white" />
-                    Start Learning
+                    View Course
                   </button>
                 ) : (
                   <button
@@ -307,30 +369,29 @@ export const MyCourses: React.FC = () => {
                     width: '100%',
                     padding: '14px',
                     textAlign: 'center',
-                    border: 'none',
+                    border: '1px solid #cbd5e1',
                     borderRadius: '10px',
                     fontSize: '1rem',
                     fontWeight: 600,
-                    background: 'linear-gradient(135deg, #0369a1, #0ea5e9)',
-                    color: 'white',
+                    background: '#f8fafc',
+                    color: '#475569',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '0.5rem',
                     transition: 'all 0.3s ease',
                     cursor: 'pointer',
-                    boxShadow: '0 6px 12px -3px rgb(3 105 161 / 0.4), inset 0 -2px 4px rgba(255,255,255,0.3)'
+                    boxShadow: 'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.14)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 10px 16px -4px rgb(3 105 161 / 0.5)';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                    e.currentTarget.style.boxShadow = '0 6px 12px -10px rgba(15,23,42,0.2), inset 2px 2px 4px rgba(255,255,255,0.95)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 6px 12px -3px rgb(3 105 161 / 0.4), inset 0 -2px 4px rgba(255,255,255,0.3)';
+                    e.currentTarget.style.boxShadow = 'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.14)';
                   }}
                 >
-                    <AlertTriangle size={18} color="#ea580c" />
                     Upgrade Package to Unlock
                   </button>
                 )}
