@@ -15,6 +15,7 @@ import { EarningTarget } from './pages/dashboard/EarningTarget';
 import { MyTeam } from './pages/dashboard/MyTeam';
 import { SalesReport } from './pages/dashboard/reports/SalesReport';
 import { PassiveEarnings } from './pages/dashboard/reports/PassiveEarnings';
+import { WalletHistory } from './pages/dashboard/reports/WalletHistory';
 import { Training } from './pages/dashboard/Training';
 import { Webinars } from './pages/dashboard/Webinars';
 import { LiveOffers } from './pages/dashboard/LiveOffers';
@@ -68,8 +69,9 @@ export const App: React.FC = () => {
           <Route path="/leaderboard" element={<DashboardRoute><Leaderboard /></DashboardRoute>} />
           <Route path="/earning-target" element={<DashboardRoute><EarningTarget /></DashboardRoute>} />
           <Route path="/team" element={<DashboardRoute><MyTeam /></DashboardRoute>} />
-          <Route path="/reports/sales" element={<DashboardRoute><SalesReport /></DashboardRoute>} />
-          <Route path="/reports/passive" element={<DashboardRoute><PassiveEarnings /></DashboardRoute>} />
+          <Route path="/reports/earnings" element={<DashboardRoute><SalesReport /></DashboardRoute>} />
+          <Route path="/reports/payouts" element={<DashboardRoute><PassiveEarnings /></DashboardRoute>} />
+          <Route path="/reports/wallet" element={<DashboardRoute><WalletHistory /></DashboardRoute>} />
           <Route path="/training" element={<DashboardRoute><Training /></DashboardRoute>} />
           <Route path="/webinars" element={<DashboardRoute><Webinars /></DashboardRoute>} />
           <Route path="/live-offers" element={<DashboardRoute><LiveOffers /></DashboardRoute>} />

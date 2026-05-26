@@ -52,6 +52,7 @@ export const Freelancing: React.FC = () => {
     },
   ];
 
+
   const filteredProjects = useMemo(
     () => projects.filter((project) => project.title.toLowerCase().includes(searchTerm.toLowerCase())),
     [projects, searchTerm]

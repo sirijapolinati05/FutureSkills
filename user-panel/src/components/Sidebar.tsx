@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import {
   Briefcase,
   BookOpen,
+  ChevronDown,
   ChevronRight,
   FileText,
   IndianRupee,
@@ -40,7 +41,7 @@ const sidebarItems: SidebarItem[] = [
   { name: 'Leaderboard', route: '/leaderboard', icon: <Trophy size={18} /> },
   { name: 'Earning Target', route: '/earning-target', icon: <IndianRupee size={18} /> },
   { name: 'My Team', route: '/team', icon: <Users size={18} /> },
-  { name: 'Reports', route: '/reports/sales', icon: <FileText size={18} /> },
+  { name: 'Reports', route: '/reports/earnings', icon: <FileText size={18} /> },
   { name: 'Training', route: '/training', icon: <Video size={18} /> },
   { name: 'Webinars', route: '/webinars', icon: <Video size={18} /> },
   { name: 'Live Offers', route: '/live-offers', icon: <MonitorPlay size={18} /> },
@@ -53,6 +54,13 @@ const Sidebar: React.FC<SidebarProps> = ({ setMobileOpen }) => {
   const location = useLocation();
   const { logout, user } = useAuth();
   const [currentTime, setCurrentTime] = useState(() => new Date());
+  const [reportsOpen, setReportsOpen] = useState(() => location.pathname.startsWith('/reports'));
+
+  const reportItems = [
+    { name: 'Earnings History', route: '/reports/earnings' },
+    { name: 'Payout History', route: '/reports/payouts' },
+    { name: 'Wallet History', route: '/reports/wallet' },
+  ];
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -61,6 +69,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setMobileOpen }) => {
 
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/reports')) {
+      setReportsOpen(true);
+    }
+  }, [location.pathname]);
 
   const isActiveRoute = (route: string) => {
     if (route.startsWith('/reports')) {
@@ -187,33 +201,101 @@ const Sidebar: React.FC<SidebarProps> = ({ setMobileOpen }) => {
         }}
       >
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.18rem' }}>
-          {sidebarItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => handleNavClick(item.route)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                width: '100%',
-                border: 'none',
-                borderRadius: '12px',
-                padding: '0.8rem 1rem',
-                cursor: 'pointer',
-                background: isActiveRoute(item.route) ? '#e5edf8' : 'transparent',
-                color: '#0f172a',
-                fontWeight: 700,
-                textAlign: 'left',
-                transition: 'background-color 0.15s ease, color 0.15s ease'
-              }}
-            >
-              <span style={{ color: isActiveRoute(item.route) ? '#0f172a' : '#1e293b', display: 'flex' }}>
-                {item.icon}
-              </span>
-              <span style={{ flex: 1 }}>{item.name}</span>
-              {item.name === 'Reports' ? <ChevronRight size={16} color="#0f172a" /> : null}
-            </button>
-          ))}
+          {sidebarItems.map((item) => {
+            if (item.name === 'Reports') {
+              const reportsActive = isActiveRoute(item.route);
+
+              return (
+                <div key={item.name} style={{ display: 'flex', flexDirection: 'column', gap: '0.18rem' }}>
+                  <button
+                    onClick={() => setReportsOpen((prev) => !prev)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      width: '100%',
+                      border: 'none',
+                      borderRadius: reportsOpen ? '12px 12px 0 0' : '12px',
+                      padding: '0.8rem 1rem',
+                      cursor: 'pointer',
+                      background: reportsActive || reportsOpen ? '#e5edf8' : 'transparent',
+                      color: '#0f172a',
+                      fontWeight: 700,
+                      textAlign: 'left',
+                      transition: 'background-color 0.15s ease, color 0.15s ease',
+                    }}
+                  >
+                    <span style={{ color: reportsActive ? '#0f172a' : '#1e293b', display: 'flex' }}>{item.icon}</span>
+                    <span style={{ flex: 1 }}>{item.name}</span>
+                    {reportsOpen ? <ChevronDown size={16} color="#0f172a" /> : <ChevronRight size={16} color="#0f172a" />}
+                  </button>
+
+                  {reportsOpen && (
+                    <div
+                      style={{
+                        background: '#ffffff',
+                        borderRadius: '0 0 14px 14px',
+                        padding: '0.2rem 0.35rem 0.45rem 2.75rem',
+                      }}
+                    >
+                      {reportItems.map((report) => {
+                        const isReportActive = location.pathname === report.route;
+
+                        return (
+                          <button
+                            key={report.name}
+                            onClick={() => handleNavClick(report.route)}
+                            style={{
+                              display: 'block',
+                              width: '100%',
+                              border: 'none',
+                              background: 'transparent',
+                              textAlign: 'left',
+                              padding: '0.75rem 0.7rem',
+                              borderRadius: '10px',
+                              cursor: 'pointer',
+                              color: isReportActive ? '#0f172a' : '#111827',
+                              fontWeight: isReportActive ? 800 : 600,
+                              fontSize: '0.96rem',
+                            }}
+                          >
+                            {report.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return (
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item.route)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                  width: '100%',
+                  border: 'none',
+                  borderRadius: '12px',
+                  padding: '0.8rem 1rem',
+                  cursor: 'pointer',
+                  background: isActiveRoute(item.route) ? '#e5edf8' : 'transparent',
+                  color: '#0f172a',
+                  fontWeight: 700,
+                  textAlign: 'left',
+                  transition: 'background-color 0.15s ease, color 0.15s ease'
+                }}
+              >
+                <span style={{ color: isActiveRoute(item.route) ? '#0f172a' : '#1e293b', display: 'flex' }}>
+                  {item.icon}
+                </span>
+                <span style={{ flex: 1 }}>{item.name}</span>
+              </button>
+            );
+          })}
         </nav>
 
         <div style={{ paddingTop: '1.25rem' }}>
