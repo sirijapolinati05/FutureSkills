@@ -174,6 +174,7 @@ export const EarningTarget: React.FC = () => {
       [field]: value,
     }));
   };
+  const selectedReward = rewardCards.find((reward) => reward.title === activeClaimCard) ?? null;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -606,215 +607,242 @@ export const EarningTarget: React.FC = () => {
                     </button>
                   </div>
 
-                  {activeClaimCard === reward.title && isUnlocked && (
-                    <div style={{ padding: '0 1.2rem 1.2rem' }}>
-                      <div
-                        style={{
-                          borderRadius: '18px',
-                          padding: '1rem',
-                          background: 'linear-gradient(145deg, #f8fbff, #e8f1fb)',
-                          border: '1px solid rgba(191, 219, 254, 0.9)',
-                          boxShadow: `
-                            12px 12px 24px rgba(148, 163, 184, 0.22),
-                            -10px -10px 22px rgba(255, 255, 255, 0.92),
-                            inset 3px 3px 6px rgba(255, 255, 255, 0.86),
-                            inset -4px -4px 8px rgba(148, 163, 184, 0.18)
-                          `,
-                        }}
-                      >
-                        <div style={{ marginBottom: '0.9rem' }}>
-                          <h4 style={{ margin: 0, fontSize: '1rem', color: '#0f172a' }}>Claim Details</h4>
-                          <p style={{ margin: '0.3rem 0 0', fontSize: '0.8rem', color: '#64748b' }}>
-                            Delivery details fill cheyyandi. Team verify chesi reward process chestharu.
-                          </p>
-                        </div>
-
-                        <div
-                          style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                            gap: '0.85rem',
-                          }}
-                          className="claim-form-grid"
-                        >
-                          {[
-                            { key: 'fullName', label: 'Full Name', type: 'text', placeholder: 'Enter your name' },
-                            { key: 'phoneNumber', label: 'Phone Number', type: 'tel', placeholder: 'Enter phone number' },
-                            { key: 'email', label: 'Email Address', type: 'email', placeholder: 'Enter email' },
-                            { key: 'pincode', label: 'Pincode', type: 'text', placeholder: 'Enter pincode' },
-                          ].map((field) => (
-                            <label
-                              key={field.key}
-                              style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}
-                            >
-                              <span style={{ fontSize: '0.77rem', fontWeight: 700, color: '#475569' }}>
-                                {field.label}
-                              </span>
-                              <input
-                                type={field.type}
-                                value={claimForm[field.key as keyof ClaimFormState]}
-                                placeholder={field.placeholder}
-                                onChange={(e) =>
-                                  updateClaimField(field.key as keyof ClaimFormState, e.currentTarget.value)
-                                }
-                                style={{
-                                  height: '42px',
-                                  borderRadius: '12px',
-                                  border: '1px solid #cbd5e1',
-                                  padding: '0 0.9rem',
-                                  outline: 'none',
-                                  background: '#f8fafc',
-                                  boxShadow:
-                                    'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.18)',
-                                  fontSize: '0.88rem',
-                                  color: '#0f172a',
-                                }}
-                              />
-                            </label>
-                          ))}
-
-                          <label
-                            style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem', gridColumn: '1 / -1' }}
-                          >
-                            <span style={{ fontSize: '0.77rem', fontWeight: 700, color: '#475569' }}>
-                              Address Line 1
-                            </span>
-                            <input
-                              type="text"
-                              value={claimForm.addressLine1}
-                              placeholder="House no, street, area"
-                              onChange={(e) => updateClaimField('addressLine1', e.currentTarget.value)}
-                              style={{
-                                height: '42px',
-                                borderRadius: '12px',
-                                border: '1px solid #cbd5e1',
-                                padding: '0 0.9rem',
-                                outline: 'none',
-                                background: '#f8fafc',
-                                boxShadow:
-                                  'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.18)',
-                                fontSize: '0.88rem',
-                                color: '#0f172a',
-                              }}
-                            />
-                          </label>
-
-                          <label
-                            style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem', gridColumn: '1 / -1' }}
-                          >
-                            <span style={{ fontSize: '0.77rem', fontWeight: 700, color: '#475569' }}>
-                              Address Line 2
-                            </span>
-                            <input
-                              type="text"
-                              value={claimForm.addressLine2}
-                              placeholder="Landmark, apartment, optional"
-                              onChange={(e) => updateClaimField('addressLine2', e.currentTarget.value)}
-                              style={{
-                                height: '42px',
-                                borderRadius: '12px',
-                                border: '1px solid #cbd5e1',
-                                padding: '0 0.9rem',
-                                outline: 'none',
-                                background: '#f8fafc',
-                                boxShadow:
-                                  'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.18)',
-                                fontSize: '0.88rem',
-                                color: '#0f172a',
-                              }}
-                            />
-                          </label>
-
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
-                            <span style={{ fontSize: '0.77rem', fontWeight: 700, color: '#475569' }}>City</span>
-                            <input
-                              type="text"
-                              value={claimForm.city}
-                              placeholder="Enter city"
-                              onChange={(e) => updateClaimField('city', e.currentTarget.value)}
-                              style={{
-                                height: '42px',
-                                borderRadius: '12px',
-                                border: '1px solid #cbd5e1',
-                                padding: '0 0.9rem',
-                                outline: 'none',
-                                background: '#f8fafc',
-                                boxShadow:
-                                  'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.18)',
-                                fontSize: '0.88rem',
-                                color: '#0f172a',
-                              }}
-                            />
-                          </label>
-
-                          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
-                            <span style={{ fontSize: '0.77rem', fontWeight: 700, color: '#475569' }}>State</span>
-                            <input
-                              type="text"
-                              value={claimForm.state}
-                              placeholder="Enter state"
-                              onChange={(e) => updateClaimField('state', e.currentTarget.value)}
-                              style={{
-                                height: '42px',
-                                borderRadius: '12px',
-                                border: '1px solid #cbd5e1',
-                                padding: '0 0.9rem',
-                                outline: 'none',
-                                background: '#f8fafc',
-                                boxShadow:
-                                  'inset 2px 2px 4px rgba(255,255,255,0.9), inset -2px -2px 4px rgba(148,163,184,0.18)',
-                                fontSize: '0.88rem',
-                                color: '#0f172a',
-                              }}
-                            />
-                          </label>
-                        </div>
-
-                        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
-                          <button
-                            type="button"
-                            style={{
-                              flex: 1,
-                              padding: '12px',
-                              borderRadius: '12px',
-                              border: 'none',
-                              background: `linear-gradient(135deg, ${reward.accent}, #0f172a)`,
-                              color: 'white',
-                              fontWeight: 700,
-                              cursor: 'pointer',
-                              boxShadow:
-                                '0 10px 18px -10px rgba(15,23,42,0.55), inset 0 2px 3px rgba(255,255,255,0.28)',
-                            }}
-                          >
-                            Submit Claim
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setActiveClaimCard(null)}
-                            style={{
-                              padding: '12px 16px',
-                              borderRadius: '12px',
-                              border: '1px solid #cbd5e1',
-                              background: '#ffffff',
-                              color: '#475569',
-                              fontWeight: 700,
-                              cursor: 'pointer',
-                              boxShadow:
-                                '0 8px 14px -12px rgba(15,23,42,0.35), inset 2px 2px 4px rgba(255,255,255,0.95)',
-                            }}
-                          >
-                            Close
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               );
             })}
           </div>
         </div>
       </div>
+
+      {selectedReward && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(15, 23, 42, 0.45)',
+            backdropFilter: 'blur(6px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1rem',
+            zIndex: 1000,
+          }}
+          onClick={() => setActiveClaimCard(null)}
+        >
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '760px',
+              maxHeight: 'calc(100vh - 2rem)',
+              overflowY: 'auto',
+              borderRadius: '28px',
+              padding: '1.2rem',
+              background: 'linear-gradient(145deg, #f8fbff, #e7eef8)',
+              border: '1px solid rgba(191, 219, 254, 0.95)',
+              boxShadow: `
+                22px 22px 40px rgba(15, 23, 42, 0.18),
+                -16px -16px 34px rgba(255, 255, 255, 0.92),
+                inset 5px 5px 10px rgba(255, 255, 255, 0.86),
+                inset -6px -6px 12px rgba(148, 163, 184, 0.2)
+              `,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                gap: '1rem',
+                marginBottom: '1rem',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#0f172a' }}>{selectedReward.title}</h3>
+                <p style={{ margin: '0.35rem 0 0', fontSize: '0.88rem', color: '#64748b', lineHeight: 1.6 }}>
+                  Delivery details fill cheyyandi. Team verify chesi reward process chestharu.
+                </p>
+              </div>
+              <span
+                style={{
+                  whiteSpace: 'nowrap',
+                  background: `linear-gradient(135deg, ${selectedReward.accent}, #0f172a)`,
+                  color: 'white',
+                  padding: '0.45rem 0.9rem',
+                  borderRadius: '999px',
+                  fontSize: '0.76rem',
+                  fontWeight: 800,
+                  boxShadow:
+                    '0 10px 16px -10px rgba(15,23,42,0.6), inset 1px 1px 3px rgba(255,255,255,0.35)',
+                }}
+              >
+                Unlock at {selectedReward.unlockAt.label}
+              </span>
+            </div>
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gap: '0.9rem',
+              }}
+              className="claim-modal-grid"
+            >
+              {[
+                { key: 'fullName', label: 'Full Name', type: 'text', placeholder: 'Enter your name' },
+                { key: 'phoneNumber', label: 'Phone Number', type: 'tel', placeholder: 'Enter phone number' },
+                { key: 'email', label: 'Email Address', type: 'email', placeholder: 'Enter email' },
+                { key: 'pincode', label: 'Pincode', type: 'text', placeholder: 'Enter pincode' },
+              ].map((field) => (
+                <label key={field.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
+                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#475569' }}>{field.label}</span>
+                  <input
+                    type={field.type}
+                    value={claimForm[field.key as keyof ClaimFormState]}
+                    placeholder={field.placeholder}
+                    onChange={(e) => updateClaimField(field.key as keyof ClaimFormState, e.currentTarget.value)}
+                    style={{
+                      height: '44px',
+                      borderRadius: '12px',
+                      border: '1px solid #cbd5e1',
+                      padding: '0 0.9rem',
+                      outline: 'none',
+                      background: '#f8fafc',
+                      boxShadow:
+                        'inset 2px 2px 4px rgba(255,255,255,0.95), inset -2px -2px 4px rgba(148,163,184,0.18)',
+                      fontSize: '0.9rem',
+                      color: '#0f172a',
+                    }}
+                  />
+                </label>
+              ))}
+
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem', gridColumn: '1 / -1' }}>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#475569' }}>Address Line 1</span>
+                <input
+                  type="text"
+                  value={claimForm.addressLine1}
+                  placeholder="House no, street, area"
+                  onChange={(e) => updateClaimField('addressLine1', e.currentTarget.value)}
+                  style={{
+                    height: '44px',
+                    borderRadius: '12px',
+                    border: '1px solid #cbd5e1',
+                    padding: '0 0.9rem',
+                    outline: 'none',
+                    background: '#f8fafc',
+                    boxShadow:
+                      'inset 2px 2px 4px rgba(255,255,255,0.95), inset -2px -2px 4px rgba(148,163,184,0.18)',
+                    fontSize: '0.9rem',
+                    color: '#0f172a',
+                  }}
+                />
+              </label>
+
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem', gridColumn: '1 / -1' }}>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#475569' }}>Address Line 2</span>
+                <input
+                  type="text"
+                  value={claimForm.addressLine2}
+                  placeholder="Landmark, apartment, optional"
+                  onChange={(e) => updateClaimField('addressLine2', e.currentTarget.value)}
+                  style={{
+                    height: '44px',
+                    borderRadius: '12px',
+                    border: '1px solid #cbd5e1',
+                    padding: '0 0.9rem',
+                    outline: 'none',
+                    background: '#f8fafc',
+                    boxShadow:
+                      'inset 2px 2px 4px rgba(255,255,255,0.95), inset -2px -2px 4px rgba(148,163,184,0.18)',
+                    fontSize: '0.9rem',
+                    color: '#0f172a',
+                  }}
+                />
+              </label>
+
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#475569' }}>City</span>
+                <input
+                  type="text"
+                  value={claimForm.city}
+                  placeholder="Enter city"
+                  onChange={(e) => updateClaimField('city', e.currentTarget.value)}
+                  style={{
+                    height: '44px',
+                    borderRadius: '12px',
+                    border: '1px solid #cbd5e1',
+                    padding: '0 0.9rem',
+                    outline: 'none',
+                    background: '#f8fafc',
+                    boxShadow:
+                      'inset 2px 2px 4px rgba(255,255,255,0.95), inset -2px -2px 4px rgba(148,163,184,0.18)',
+                    fontSize: '0.9rem',
+                    color: '#0f172a',
+                  }}
+                />
+              </label>
+
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '0.38rem' }}>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#475569' }}>State</span>
+                <input
+                  type="text"
+                  value={claimForm.state}
+                  placeholder="Enter state"
+                  onChange={(e) => updateClaimField('state', e.currentTarget.value)}
+                  style={{
+                    height: '44px',
+                    borderRadius: '12px',
+                    border: '1px solid #cbd5e1',
+                    padding: '0 0.9rem',
+                    outline: 'none',
+                    background: '#f8fafc',
+                    boxShadow:
+                      'inset 2px 2px 4px rgba(255,255,255,0.95), inset -2px -2px 4px rgba(148,163,184,0.18)',
+                    fontSize: '0.9rem',
+                    color: '#0f172a',
+                  }}
+                />
+              </label>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.15rem', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => setActiveClaimCard(null)}
+                style={{
+                  padding: '12px 18px',
+                  borderRadius: '12px',
+                  border: '1px solid #cbd5e1',
+                  background: '#ffffff',
+                  color: '#475569',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 8px 14px -12px rgba(15,23,42,0.35), inset 2px 2px 4px rgba(255,255,255,0.95)',
+                }}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                style={{
+                  padding: '12px 20px',
+                  borderRadius: '12px',
+                  border: 'none',
+                  background: `linear-gradient(135deg, ${selectedReward.accent}, #0f172a)`,
+                  color: 'white',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 10px 18px -10px rgba(15,23,42,0.55), inset 0 2px 3px rgba(255,255,255,0.28)',
+                }}
+              >
+                Submit Claim
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`
         @media (max-width: 1200px) {
@@ -828,7 +856,7 @@ export const EarningTarget: React.FC = () => {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
           }
 
-          .claim-form-grid {
+          .claim-modal-grid {
             grid-template-columns: minmax(0, 1fr) !important;
           }
         }

@@ -243,53 +243,6 @@ export const MyTeam: React.FC = () => {
           </table>
         </div>
 
-        <div className="my-team-mobile-list">
-          {team.map((member) => {
-            const isDirect = member.level === 1;
-            const isActive = member.status.toLowerCase() === 'active';
-
-            return (
-              <div key={member.id} className="my-team-mobile-card">
-                <div className="my-team-mobile-header">
-                  <div>
-                    <h4>{member.name}</h4>
-                    <p>{member.packageName}</p>
-                  </div>
-                  <span
-                    className="my-team-pill status-pill"
-                    style={{
-                      background: isActive 
-                        ? 'linear-gradient(145deg, #4ade80, #22c55e)' 
-                        : 'linear-gradient(145deg, #f87171, #ef4444)',
-                      color: isActive ? '#14532d' : 'white',
-                    }}
-                  >
-                    {member.status}
-                  </span>
-                </div>
-
-                <div className="my-team-mobile-grid">
-                  <div>
-                    <span>Email</span>
-                    <strong>{member.email}</strong>
-                  </div>
-                  <div>
-                    <span>Phone</span>
-                    <strong>{member.phone}</strong>
-                  </div>
-                  <div>
-                    <span>Level</span>
-                    <strong>Level {member.level} {isDirect ? 'Direct' : 'Indirect'}</strong>
-                  </div>
-                  <div>
-                    <span>Joined</span>
-                    <strong>{formatJoinedDate(member.joinedDate)}</strong>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
 
       <style>{`
@@ -323,6 +276,12 @@ export const MyTeam: React.FC = () => {
         .affiliate-table-wrap.my-team-table-wrap {
           padding: 1.35rem;
           overflow-x: auto;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+
+        .affiliate-table-wrap.my-team-table-wrap::-webkit-scrollbar {
+          display: none;
         }
 
         .affiliate-table.my-team-table {
@@ -413,20 +372,6 @@ export const MyTeam: React.FC = () => {
           color: #0f172a;
         }
 
-        .my-team-mobile-list {
-          display: none;
-          padding: 1.1rem;
-          gap: 1rem;
-        }
-
-        .my-team-mobile-card {
-          background: #f8fafc;
-          border-radius: 18px;
-          padding: 1rem;
-          box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.12),
-                      inset -5px -5px 10px rgba(255, 255, 255, 0.96);
-        }
-
         @media (max-width: 900px) {
           .my-team-stats-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -435,10 +380,27 @@ export const MyTeam: React.FC = () => {
 
         @media (max-width: 768px) {
           .affiliate-table-wrap.my-team-table-wrap {
-            display: none;
+            padding: 1rem;
           }
-          .my-team-mobile-list {
-            display: grid;
+
+          .affiliate-table.my-team-table {
+            min-width: 860px;
+            border-spacing: 6px 10px;
+          }
+
+          .affiliate-table.my-team-table th {
+            padding: 0.88rem 0.8rem;
+            font-size: 0.78rem;
+          }
+
+          .affiliate-table.my-team-table td {
+            padding: 0.95rem 0.8rem;
+            font-size: 0.84rem;
+          }
+
+          .my-team-pill {
+            padding: 0.45rem 0.9rem;
+            font-size: 0.76rem;
           }
         }
 
