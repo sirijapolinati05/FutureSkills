@@ -33,12 +33,42 @@ export const MyCourses: React.FC = () => {
 
   const getCategoryStyle = (category: string) => {
     const styles: Record<string, React.CSSProperties> = {
-      Design: { background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)', color: 'white' },
-      Development: { background: 'linear-gradient(135deg, #0284c8, #22d3ee)', color: 'white' },
-      Marketing: { background: 'linear-gradient(135deg, #0c4a6e, #22d3ee)', color: 'white' },
-      Business: { background: 'linear-gradient(135deg, #0369a1, #67e8f9)', color: 'white' },
+      Design: {
+        background: 'linear-gradient(145deg, #c2410c, #fdba74)',
+        color: '#fff7ed',
+        border: '1px solid rgba(194, 65, 12, 0.45)',
+        boxShadow:
+          '7px 7px 14px rgba(124, 45, 18, 0.22), -3px -3px 8px rgba(255,255,255,0.36), inset 2px 2px 4px rgba(255,244,230,0.32), inset -3px -3px 6px rgba(124,45,18,0.16)',
+      },
+      Development: {
+        background: 'linear-gradient(145deg, #c2410c, #fdba74)',
+        color: '#fff7ed',
+        border: '1px solid rgba(194, 65, 12, 0.45)',
+        boxShadow:
+          '7px 7px 14px rgba(124, 45, 18, 0.22), -3px -3px 8px rgba(255,255,255,0.36), inset 2px 2px 4px rgba(255,244,230,0.32), inset -3px -3px 6px rgba(124,45,18,0.16)',
+      },
+      Marketing: {
+        background: 'linear-gradient(145deg, #c2410c, #fdba74)',
+        color: '#fff7ed',
+        border: '1px solid rgba(194, 65, 12, 0.45)',
+        boxShadow:
+          '7px 7px 14px rgba(124, 45, 18, 0.22), -3px -3px 8px rgba(255,255,255,0.36), inset 2px 2px 4px rgba(255,244,230,0.32), inset -3px -3px 6px rgba(124,45,18,0.16)',
+      },
+      Business: {
+        background: 'linear-gradient(145deg, #c2410c, #fdba74)',
+        color: '#fff7ed',
+        border: '1px solid rgba(194, 65, 12, 0.45)',
+        boxShadow:
+          '7px 7px 14px rgba(124, 45, 18, 0.22), -3px -3px 8px rgba(255,255,255,0.36), inset 2px 2px 4px rgba(255,244,230,0.32), inset -3px -3px 6px rgba(124,45,18,0.16)',
+      },
     };
-    return styles[category] || { background: 'linear-gradient(135deg, #0ea5e9, #67e8f9)', color: 'white' };
+    return styles[category] || {
+      background: 'linear-gradient(145deg, #c2410c, #fdba74)',
+      color: '#fff7ed',
+      border: '1px solid rgba(194, 65, 12, 0.45)',
+      boxShadow:
+        '7px 7px 14px rgba(124, 45, 18, 0.22), -3px -3px 8px rgba(255,255,255,0.36), inset 2px 2px 4px rgba(255,244,230,0.32), inset -3px -3px 6px rgba(124,45,18,0.16)',
+    };
   };
 
   return (
@@ -94,29 +124,31 @@ export const MyCourses: React.FC = () => {
               key={course.id}
               className="card"
               style={{
+                display: 'flex',
+                flexDirection: 'column',
                 padding: 0,
                 overflow: 'hidden',
                 background: 'white',
-                borderRadius: '16px',
-                boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)',
+                border: hasAccess ? '1px solid #e2e8f0' : '1px solid #fed7aa',
+                borderRadius: '18px',
+                boxShadow: '0 20px 40px -10px rgb(0 0 0 / 0.12)',
                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 cursor: hasAccess ? 'pointer' : 'default',
                 position: 'relative',
+                height: '100%',
               }}
               onMouseEnter={(e) => {
                 const card = e.currentTarget;
-                card.style.transform = hasAccess ? 'translateY(-12px) scale(1.04)' : 'translateY(-8px) scale(1.02)';
-                card.style.boxShadow = hasAccess
-                  ? '0 25px 50px -12px rgba(14, 165, 233, 0.3), 0 20px 40px -10px rgba(0,0,0,0.2)'
-                  : '0 22px 40px -12px rgba(251, 146, 60, 0.28), 0 16px 30px -10px rgba(15,23,42,0.18)';
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 30px 50px -12px rgb(0 0 0 / 0.18)';
 
                 const img = card.querySelector('img') as HTMLImageElement;
-                if (img) img.style.transform = hasAccess ? 'scale(1.1)' : 'scale(1.06)';
+                if (img) img.style.transform = 'scale(1.06)';
               }}
               onMouseLeave={(e) => {
                 const card = e.currentTarget;
-                card.style.transform = 'translateY(0) scale(1)';
-                card.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)';
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 20px 40px -10px rgb(0 0 0 / 0.12)';
                 
                 const img = card.querySelector('img') as HTMLImageElement;
                 if (img) img.style.transform = 'scale(1)';
@@ -125,20 +157,35 @@ export const MyCourses: React.FC = () => {
               {/* Image Section */}
               <div style={{
                 position: 'relative',
-                height: '200px',
+                height: '190px',
                 overflow: 'hidden',
-                background: '#f8fafc'
+                background: '#f8fafc',
+                borderRadius: '18px 18px 0 0',
+                padding: '0.8rem 0.8rem 0.3rem',
               }}>
-                <img
-                  src={course.thumbnail}
-                  alt={course.title}
+                <div
                   style={{
+                    background: 'white',
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.6s ease',
+                    borderRadius: '14px',
+                    border: '3px solid #f1f5f9',
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
+                    overflow: 'hidden',
                   }}
-                />
+                >
+                  <img
+                    src={course.thumbnail}
+                    alt={course.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.5s ease',
+                      display: 'block',
+                    }}
+                  />
+                </div>
 
                 {/* Locked Overlay */}
                 {!hasAccess && (
@@ -162,14 +209,14 @@ export const MyCourses: React.FC = () => {
                 {/* Category Badge */}
                 <span style={{
                   position: 'absolute',
-                  top: '14px',
-                  left: '14px',
-                  padding: '0.4rem 0.85rem',
-                  borderRadius: '8px',
-                  fontSize: '0.78rem',
+                  top: '16px',
+                  left: '16px',
+                  padding: '0.42rem 0.88rem',
+                  borderRadius: '999px',
+                  fontSize: '0.8rem',
                   fontWeight: 700,
-                  boxShadow: '0 4px 15px rgba(14, 165, 233, 0.25)',
-                  backdropFilter: 'blur(6px)',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '0.01em',
                   ...getCategoryStyle(course.category)
                 }}>
                   {course.category}
@@ -225,63 +272,67 @@ export const MyCourses: React.FC = () => {
                     style={{
                       marginTop: '0.8rem',
                       width: '100%',
-                      padding: '0.75rem',
-                      fontSize: '0.95rem',
+                      padding: '14px',
+                      fontSize: '1rem',
                       fontWeight: 600,
                       borderRadius: '10px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '0.5rem',
-                      background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                      background: 'linear-gradient(135deg, #0369a1, #0ea5e9)',
                       color: 'white',
                       border: 'none',
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
-                      boxShadow: '0 10px 20px -10px rgba(14,165,233,0.45)'
+                      boxShadow: '0 6px 12px -3px rgb(3 105 161 / 0.4), inset 0 -2px 4px rgba(255,255,255,0.3)'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-3px)';
-                      e.currentTarget.style.boxShadow = '0 16px 26px -12px rgba(14,165,233,0.55)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 10px 16px -4px rgb(3 105 161 / 0.5)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 10px 20px -10px rgba(14,165,233,0.45)';
+                      e.currentTarget.style.boxShadow = '0 6px 12px -3px rgb(3 105 161 / 0.4), inset 0 -2px 4px rgba(255,255,255,0.3)';
                     }}
                   >
                     <Play size={18} fill="white" />
                     Start Learning
                   </button>
                 ) : (
-                  <div style={{
+                  <button
+                    type="button"
+                    style={{
                     marginTop: '0.8rem',
-                    padding: '1rem 1.15rem',
+                    width: '100%',
+                    padding: '14px',
                     textAlign: 'center',
-                    border: '2px dashed #fb923c',
-                    borderRadius: '14px',
-                    fontSize: '0.88rem',
-                    fontWeight: 700,
-                    background: 'linear-gradient(145deg, #fef3c7 0%, #fed7aa 100%)',
-                    color: '#c2410c',
+                    border: 'none',
+                    borderRadius: '10px',
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    background: 'linear-gradient(135deg, #0369a1, #0ea5e9)',
+                    color: 'white',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '0.5rem',
                     transition: 'all 0.3s ease',
                     cursor: 'pointer',
-                    boxShadow: '0 18px 30px -16px rgba(251,146,60,0.56), 8px 8px 16px rgba(194,65,12,0.18), -5px -5px 12px rgba(255,255,255,0.55), inset 2px 2px 5px rgba(255,255,255,0.48)'
+                    boxShadow: '0 6px 12px -3px rgb(3 105 161 / 0.4), inset 0 -2px 4px rgba(255,255,255,0.3)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-6px) scale(1.01)';
-                    e.currentTarget.style.boxShadow = '0 24px 36px -18px rgba(251,146,60,0.62), 10px 10px 18px rgba(194,65,12,0.2), -6px -6px 14px rgba(255,255,255,0.58), inset 2px 2px 5px rgba(255,255,255,0.5)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 10px 16px -4px rgb(3 105 161 / 0.5)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 18px 30px -16px rgba(251,146,60,0.56), 8px 8px 16px rgba(194,65,12,0.18), -5px -5px 12px rgba(255,255,255,0.55), inset 2px 2px 5px rgba(255,255,255,0.48)';
-                  }}>
+                    e.currentTarget.style.boxShadow = '0 6px 12px -3px rgb(3 105 161 / 0.4), inset 0 -2px 4px rgba(255,255,255,0.3)';
+                  }}
+                >
                     <AlertTriangle size={18} color="#ea580c" />
                     Upgrade Package to Unlock
-                  </div>
+                  </button>
                 )}
               </div>
             </div>
