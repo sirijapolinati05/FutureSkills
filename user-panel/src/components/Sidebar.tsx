@@ -18,6 +18,7 @@ import {
   User,
   Users,
   Video,
+  Wallet,
 } from 'lucide-react';
 
 interface SidebarItem {
@@ -40,6 +41,7 @@ const sidebarItems: SidebarItem[] = [
   { name: 'Upgrade', route: '/upgrade', icon: <TrendingUp size={18} /> },
   { name: 'Leaderboard', route: '/leaderboard', icon: <Trophy size={18} /> },
   { name: 'Earning Target', route: '/earning-target', icon: <IndianRupee size={18} /> },
+  { name: 'Wallet', route: '/reports/wallet', icon: <Wallet size={18} /> },
   { name: 'My Team', route: '/team', icon: <Users size={18} /> },
   { name: 'Reports', route: '/reports/earnings', icon: <FileText size={18} /> },
   { name: 'Training', route: '/training', icon: <Video size={18} /> },

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Users, CheckSquare, BookOpen, LogOut, Menu, X, ShieldAlert, Gift, Video, Calendar } from 'lucide-react';
+import { LayoutDashboard, Users, CheckSquare, BookOpen, LogOut, Menu, X, ShieldAlert, Gift, Video, Calendar, Package, Target, Link2, BriefcaseBusiness, FileText } from 'lucide-react';
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { admin, logout } = useAuth();
@@ -14,9 +14,14 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
     { name: 'User Management', path: '/users', icon: <Users size={18} /> },
     { name: 'KYC Approvals', path: '/kyc', icon: <CheckSquare size={18} /> },
     { name: 'Courses Manager', path: '/courses', icon: <BookOpen size={18} /> },
+    { name: 'Packages', path: '/packages', icon: <Package size={18} /> },
+    { name: 'Earning Target', path: '/earning-target', icon: <Target size={18} /> },
     { name: 'Live Offers', path: '/live-offers', icon: <Gift size={18} /> },
     { name: 'Training Videos', path: '/training', icon: <Video size={18} /> },
     { name: 'Webinars', path: '/webinars', icon: <Calendar size={18} /> },
+    { name: 'Community Links', path: '/community', icon: <Link2 size={18} /> },
+    { name: 'Freelancing', path: '/freelancing', icon: <BriefcaseBusiness size={18} /> },
+    { name: 'Reports Data', path: '/reports', icon: <FileText size={18} /> },
   ];
 
   const handleNavClick = (path: string) => {

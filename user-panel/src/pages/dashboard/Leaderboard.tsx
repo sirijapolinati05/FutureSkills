@@ -27,13 +27,13 @@ export const Leaderboard: React.FC = () => {
   ];
 
   const LeaderboardCard = ({ title, leaders, period }: { title: string; leaders: any[]; period: string }) => (
-    <div 
+    <div
       className="three-d-card leaderboard-card"
       style={{
         background: 'linear-gradient(145deg, #0369a1, #0ea5e9, #67e8f9)',
         borderRadius: '24px',
         padding: '2rem 1.8rem',
-        boxShadow: `8px 8px 16px rgba(14, 165, 233, 0.3), -8px -8px 16px rgba(255,255,255,0.85), 
+        boxShadow: `8px 8px 16px rgba(14, 165, 233, 0.3), -8px -8px 16px rgba(255,255,255,0.85),
                     inset 4px 4px 8px rgba(255,255,255,0.5), inset -4px -4px 8px rgba(14,165,233,0.2)`,
         border: 'none',
         transition: 'all 0.35s cubic-bezier(0.4, 0.0, 0.2, 1)',
@@ -43,21 +43,20 @@ export const Leaderboard: React.FC = () => {
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-14px)';
-        e.currentTarget.style.boxShadow = `14px 14px 28px rgba(14, 165, 233, 0.4), -14px -14px 28px rgba(255,255,255,0.95), 
+        e.currentTarget.style.boxShadow = `14px 14px 28px rgba(14, 165, 233, 0.4), -14px -14px 28px rgba(255,255,255,0.95),
                                           inset 5px 5px 10px rgba(255,255,255,0.6), inset -5px -5px 10px rgba(14,165,233,0.25)`;
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = `8px 8px 16px rgba(14, 165, 233, 0.3), -8px -8px 16px rgba(255,255,255,0.85), 
+        e.currentTarget.style.boxShadow = `8px 8px 16px rgba(14, 165, 233, 0.3), -8px -8px 16px rgba(255,255,255,0.85),
                                           inset 4px 4px 8px rgba(255,255,255,0.5), inset -4px -4px 8px rgba(14,165,233,0.25)`;
       }}
     >
-      {/* Header */}
       <div className="leaderboard-card-header" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-        <div style={{ 
-          background: 'linear-gradient(135deg, #0369a1, #0ea5e9)', 
-          color: 'white', 
-          padding: '0.7rem', 
+        <div style={{
+          background: 'linear-gradient(135deg, #0369a1, #0ea5e9)',
+          color: 'white',
+          padding: '0.7rem',
           borderRadius: '14px',
           boxShadow: 'inset 0 4px 8px rgba(255,255,255,0.3)'
         }}>
@@ -69,21 +68,21 @@ export const Leaderboard: React.FC = () => {
         <h3 className="leaderboard-card-title" style={{ fontSize: '1.45rem', fontWeight: 700, color: 'white' }}>{title}</h3>
       </div>
 
-      {/* Top 3 Orange Cards */}
-      <div className="leaderboard-top-three" style={{ display: 'flex', justifyContent: 'center', gap: '1.4rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+      <div className="leaderboard-top-three" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', alignItems: 'stretch', gap: '1rem', marginBottom: '2rem' }}>
         {leaders.map((leader, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="leaderboard-top-card"
             style={{
               textAlign: 'center',
               background: 'linear-gradient(145deg, #f97316, #fb923c, #fed7aa)',
               padding: '1.4rem 1rem 1.1rem',
               borderRadius: '20px',
-              boxShadow: `6px 6px 12px rgba(249,115,22,0.3), -6px -6px 12px rgba(255,255,255,0.9), 
+              boxShadow: `6px 6px 12px rgba(249,115,22,0.3), -6px -6px 12px rgba(255,255,255,0.9),
                           inset 3px 3px 6px rgba(255,255,255,0.7), inset -3px -3px 6px rgba(249,115,22,0.25)`,
               border: `4px solid ${index === 0 ? '#22d3ee' : '#67e8f9'}`,
-              minWidth: '142px',
+              minWidth: 0,
+              width: '100%',
               transition: 'all 0.3s ease',
               position: 'relative'
             }}
@@ -128,11 +127,10 @@ export const Leaderboard: React.FC = () => {
         ))}
       </div>
 
-      {/* Lower Ranks - Now 3D Floating Buttons */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {[4, 5, 6].map((rank) => (
-          <div 
-            key={rank} 
+          <div
+            key={rank}
             className="leaderboard-rank-row"
             style={{
               display: 'flex',
@@ -141,7 +139,7 @@ export const Leaderboard: React.FC = () => {
               background: 'linear-gradient(145deg, #ffffff, #f0f9ff)',
               padding: '1rem 1.4rem',
               borderRadius: '16px',
-              boxShadow: `6px 6px 12px rgba(14,165,233,0.2), -6px -6px 12px rgba(255,255,255,0.9), 
+              boxShadow: `6px 6px 12px rgba(14,165,233,0.2), -6px -6px 12px rgba(255,255,255,0.9),
                           inset 3px 3px 6px rgba(255,255,255,0.8), inset -3px -3px 6px rgba(14,165,233,0.15)`,
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               cursor: 'pointer',
@@ -149,12 +147,12 @@ export const Leaderboard: React.FC = () => {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-6px)';
-              e.currentTarget.style.boxShadow = `10px 10px 20px rgba(14,165,233,0.3), -10px -10px 20px rgba(255,255,255,0.95), 
+              e.currentTarget.style.boxShadow = `10px 10px 20px rgba(14,165,233,0.3), -10px -10px 20px rgba(255,255,255,0.95),
                                                 inset 4px 4px 8px rgba(255,255,255,0.9)`;
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = `6px 6px 12px rgba(14,165,233,0.2), -6px -6px 12px rgba(255,255,255,0.9), 
+              e.currentTarget.style.boxShadow = `6px 6px 12px rgba(14,165,233,0.2), -6px -6px 12px rgba(255,255,255,0.9),
                                                 inset 3px 3px 6px rgba(255,255,255,0.8), inset -3px -3px 6px rgba(14,165,233,0.15)`;
             }}
           >
@@ -176,10 +174,10 @@ export const Leaderboard: React.FC = () => {
               </div>
               <span className="leaderboard-rank-name" style={{ fontWeight: 600, color: '#1e293b' }}>Sample User {rank}</span>
             </div>
-            <span className="leaderboard-rank-amount" style={{ 
-              color: '#16a34a', 
-              fontWeight: 700, 
-              fontSize: '1.1rem' 
+            <span className="leaderboard-rank-amount" style={{
+              color: '#16a34a',
+              fontWeight: 700,
+              fontSize: '1.1rem'
             }}>₹{1250 - rank * 80}</span>
           </div>
         ))}
@@ -198,7 +196,7 @@ export const Leaderboard: React.FC = () => {
 
       <div className="leaderboard-grid" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(520px, 1fr))',
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
         gap: '2rem'
       }}>
         <LeaderboardCard title="TODAY'S LEADERBOARD" leaders={todayLeaders} period="today" />

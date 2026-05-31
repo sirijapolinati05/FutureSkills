@@ -22,24 +22,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const initSession = async () => {
       await localDb.syncWithServer();
       localDb.ensureSeedData();
-      const storedUser = localStorage.getItem('az_session') || sessionStorage.getItem('az_session');
-      if (storedUser) {
-        try {
-          const parsed = JSON.parse(storedUser);
-          const dbUsers = localDb.getUsers();
-          const freshUser = dbUsers.find(u => u.email === parsed.email);
-          if (freshUser) {
-            setUser(freshUser);
-          } else {
-            setUser(parsed);
-          }
-        } catch (e) {
-          console.error('Failed to parse session', e);
-        }
-      }
+      refreshSessionUser();
       setLoading(false);
     };
+
+    const refreshSessionUser = () => {
+      const storedUser = localStorage.getItem('az_session') || sessionStorage.getItem('az_session');
+      if (!storedUser) {
+        setUser(null);
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(storedUser);
+        const dbUsers = localDb.getUsers();
+        const freshUser = dbUsers.find(u => u.email === parsed.email);
+        if (freshUser) {
+          setUser(freshUser);
+        } else {
+          setUser(parsed);
+        }
+      } catch (e) {
+        console.error('Failed to parse session', e);
+      }
+    };
+
     initSession();
+
+    const syncUserState = async () => {
+      await localDb.syncWithServer();
+      refreshSessionUser();
+    };
+
+    const intervalId = window.setInterval(syncUserState, 15000);
+    window.addEventListener('focus', syncUserState);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener('focus', syncUserState);
+    };
   }, []);
 
   const login = async (email: string, password: string, rememberMe: boolean): Promise<boolean> => {

@@ -26,14 +26,7 @@ export const UserManagement: React.FC = () => {
     setEditingUserId(null);
   };
 
-  const packages = [
-    'Classic Package',
-    'Heroic Package',
-    'Prime Package',
-    'Crystal Package',
-    'Platinum Package',
-    'Premium Package',
-  ];
+  const packages = localDb.getPackages().map((pkg) => pkg.name);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

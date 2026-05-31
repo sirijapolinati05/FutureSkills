@@ -26,13 +26,13 @@ export const UserDashboard: React.FC = () => {
   if (!stats) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading dashboard statistics...</div>;
 
   const cardList = [
-    { label: "Today's Earning", val: stats.today, className: "grad-today" },
-    { label: "7 Days Earning", val: stats.sevenDays, className: "grad-seven" },
-    { label: "30 Days Earning", val: stats.thirtyDays, className: "grad-thirty" },
-    { label: "All Time Earning", val: stats.allTime, className: "grad-alltime" },
-    { label: "All Time Passive", val: stats.passive, className: "grad-passive" },
-    { label: "Pending Balance", val: stats.pending, className: "grad-pending" },
-    { label: "Industry Earning", val: stats.industry, className: "grad-industry" },
+    { label: "Today's Earning", val: 0, className: "grad-today" },
+    { label: "7 Days Earning", val: 0, className: "grad-seven" },
+    { label: "30 Days Earning", val: 0, className: "grad-thirty" },
+    { label: "All Time Earning", val: 0, className: "grad-alltime" },
+    { label: "All Time Passive", val: 0, className: "grad-passive" },
+    { label: "Pending Balance", val: 0, className: "grad-pending" },
+    { label: "Industry Earning", val: 0, className: "grad-industry" },
   ];
 
   const getAbstractShapes = (index: number) => {
@@ -217,7 +217,7 @@ export const UserDashboard: React.FC = () => {
                 transform: 'translateY(-2px)'
               }}
             >
-              {user?.packageName || 'No active package'}
+              {'Starter'}
             </span>
           </div>
         </div>

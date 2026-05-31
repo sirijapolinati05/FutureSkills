@@ -10,6 +10,11 @@ import { CoursesManager } from './pages/admin/CoursesManager';
 import { LiveOffersManager } from './pages/admin/LiveOffersManager';
 import { TrainingManager } from './pages/admin/TrainingManager';
 import { WebinarsManager } from './pages/admin/WebinarsManager';
+import { PackagesManager } from './pages/admin/PackagesManager';
+import { TargetsManager } from './pages/admin/TargetsManager';
+import { CommunityLinksManager } from './pages/admin/CommunityLinksManager';
+import { FreelancingManager } from './pages/admin/FreelancingManager';
+import { ReportsManager } from './pages/admin/ReportsManager';
 
 // Guard for protected admin routes
 const RouteGuard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -52,9 +57,14 @@ export const App: React.FC = () => {
           <Route path="/users" element={<DashboardRoute><UserManagement /></DashboardRoute>} />
           <Route path="/kyc" element={<DashboardRoute><KycApprovals /></DashboardRoute>} />
           <Route path="/courses" element={<DashboardRoute><CoursesManager /></DashboardRoute>} />
+          <Route path="/packages" element={<DashboardRoute><PackagesManager /></DashboardRoute>} />
+          <Route path="/earning-target" element={<DashboardRoute><TargetsManager /></DashboardRoute>} />
           <Route path="/live-offers" element={<DashboardRoute><LiveOffersManager /></DashboardRoute>} />
           <Route path="/training" element={<DashboardRoute><TrainingManager /></DashboardRoute>} />
           <Route path="/webinars" element={<DashboardRoute><WebinarsManager /></DashboardRoute>} />
+          <Route path="/community" element={<DashboardRoute><CommunityLinksManager /></DashboardRoute>} />
+          <Route path="/freelancing" element={<DashboardRoute><FreelancingManager /></DashboardRoute>} />
+          <Route path="/reports" element={<DashboardRoute><ReportsManager /></DashboardRoute>} />
 
           {/* Catch-all Redirect */}
           <Route path="*" element={<Navigate to="/" replace />} />

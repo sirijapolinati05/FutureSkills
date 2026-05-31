@@ -72,7 +72,6 @@ const buildMilestones = (currentEarnings: number) => {
   return milestones;
 };
 
-// ==================== EARNING TARGET SCREEN ====================
 export const EarningTarget: React.FC = () => {
   const currentEarnings = 415104;
   const dotSize = 18;
@@ -870,4 +869,5 @@ export const EarningTarget: React.FC = () => {
     </div>
   );
 };
+
 export default EarningTarget;
