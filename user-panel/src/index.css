@@ -79,6 +79,10 @@ button, input, select, textarea {
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 }
 
+.dashboard-stats-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -238,13 +242,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Responsive utilities */
-@media (min-width: 769px) {
+@media (min-width: 901px) {
   .navbar-mobile-logo {
     display: none !important;
   }
 
   .dashboard-stats-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dashboard-stat-card-featured {
+    grid-column: 1 / -1;
   }
 }
 
@@ -289,7 +297,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .dashboard-stats-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem !important;
   }
 
