@@ -170,7 +170,9 @@ export const Login: React.FC = () => {
         .auth-page {
           position: relative;
           min-height: 100vh;
-          overflow: hidden;
+          width: 100%;
+          max-width: 100%;
+          overflow-x: clip;
           background:
             radial-gradient(circle at 85% 15%, rgba(118, 52, 255, 0.18), transparent 28%),
             radial-gradient(circle at 8% 92%, rgba(0, 207, 255, 0.12), transparent 25%),
@@ -552,20 +554,61 @@ export const Login: React.FC = () => {
         }
 
         @media (max-width: 680px) {
+          .auth-page {
+            overflow-x: clip;
+          }
+
           .auth-layout {
-            width: min(100% - 2rem, 520px);
-            padding: 1.25rem 0 2rem;
+            width: 100%;
+            max-width: 520px;
+            padding: 1.25rem 1rem 2rem;
+            justify-items: center;
+            overflow-x: clip;
+          }
+
+          .auth-showcase {
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
           }
 
           .auth-back {
+            align-self: flex-start;
             margin-bottom: 1.8rem;
           }
 
+          .auth-brand {
+            width: min(230px, 78vw);
+            height: 68px;
+            margin-bottom: 2rem;
+          }
+
+          .auth-brand img {
+            width: 100%;
+          }
+
+          .auth-pill {
+            max-width: 100%;
+            padding: 0.6rem 0.8rem;
+            gap: 0.4rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.09em;
+          }
+
           .auth-showcase h1 {
-            font-size: 3rem;
+            max-width: 100%;
+            font-size: clamp(2.35rem, 12vw, 3rem);
+            letter-spacing: -0.035em;
+          }
+
+          .auth-showcase > p {
+            max-width: 100%;
+            font-size: 1rem;
           }
 
           .auth-metrics {
+            width: 100%;
             grid-template-columns: minmax(0, 1fr);
             margin-top: 2rem;
           }
@@ -575,7 +618,21 @@ export const Login: React.FC = () => {
           }
 
           .auth-card {
+            width: 100%;
+            max-width: 100%;
             border-radius: 22px;
+            padding: 1.4rem;
+          }
+
+          .auth-field > div,
+          .auth-submit,
+          .auth-demo {
+            max-width: 100%;
+            min-width: 0;
+          }
+
+          .auth-demo {
+            text-align: center;
           }
 
           .auth-register {

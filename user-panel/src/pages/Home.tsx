@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   BookOpen,
+  Clock,
   GraduationCap,
   Headphones,
   Play,
@@ -12,30 +13,19 @@ import {
 } from 'lucide-react';
 import skillLogo from '../assets/Skill-To-Wealth.png';
 import heroPrism from '../assets/hero.png';
-
-const courseCards = [
-  {
-    title: 'Graphic Design Masterclass',
-    price: 'INR 299',
-    img: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&auto=format&fit=crop&q=60',
-  },
-  {
-    title: 'Affiliate Marketing Secrets',
-    price: 'INR 599',
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60',
-  },
-  {
-    title: 'Website Development (No-Code)',
-    price: 'INR 899',
-    img: 'https://images.unsplash.com/photo-1547658719-da2b81169d42?w=500&auto=format&fit=crop&q=60',
-  },
-];
+import { Course, PackageConfig, localDb } from '../db/localDb';
+import { getDashboardImage } from '../lib/dashboardAssets';
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [packages, setPackages] = useState<PackageConfig[]>([]);
 
   useEffect(() => {
+    setCourses(localDb.getCourses());
+    setPackages(localDb.getPackages());
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -45,6 +35,11 @@ export const Home: React.FC = () => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const getCoursePrice = (requiredPackage: string) => {
+    const packageInfo = packages.find((pkg) => pkg.name === requiredPackage);
+    return packageInfo ? `INR ${packageInfo.price}` : requiredPackage;
+  };
 
   return (
     <div className="landing-page">
@@ -178,13 +173,21 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="landing-course-grid">
-          {courseCards.map((course) => (
-            <div key={course.title} className="landing-course-card">
-              <img src={course.img} alt={course.title} />
-              <div>
+          {courses.map((course) => (
+            <div key={course.id} className="landing-course-card">
+              <div className="landing-course-media">
+                <img src={course.thumbnail || getDashboardImage(course.imageKey)} alt={course.title} />
+                <span>{course.category}</span>
+              </div>
+              <div className="landing-course-body">
                 <h3>{course.title}</h3>
+                <p>{course.description}</p>
+                <div className="landing-course-meta">
+                  <span><BookOpen size={15} /> {course.lessonsCount} Lessons</span>
+                  <span><Clock size={15} /> {course.duration}</span>
+                </div>
                 <div className="landing-course-footer">
-                  <span>{course.price}</span>
+                  <span>{getCoursePrice(course.requiredPackage)}</span>
                   <button onClick={() => navigate('/register')}>Enroll Now</button>
                 </div>
               </div>
@@ -227,9 +230,27 @@ export const Home: React.FC = () => {
 
       <style>{`
         .landing-page {
+          position: relative;
           min-height: 100vh;
-          background: #05020f;
+          width: 100%;
+          max-width: 100%;
+          overflow-x: clip;
+          background:
+            radial-gradient(circle at 78% 22%, rgba(91, 58, 255, 0.42) 0 12%, transparent 34%),
+            radial-gradient(circle at 92% 38%, rgba(255, 50, 206, 0.26), transparent 28%),
+            radial-gradient(circle at 38% 18%, rgba(0, 100, 255, 0.16), transparent 30%),
+            linear-gradient(115deg, #03020a 0%, #050317 45%, #07011a 100%);
           color: white;
+        }
+
+        .landing-page::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background:
+            linear-gradient(90deg, rgba(5, 2, 15, 0.86) 0%, rgba(5, 2, 15, 0.62) 44%, rgba(5, 2, 15, 0.18) 100%),
+            repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 110px);
         }
 
         .landing-header {
@@ -348,24 +369,15 @@ export const Home: React.FC = () => {
 
         .landing-hero {
           position: relative;
+          z-index: 1;
           min-height: 100vh;
           overflow: hidden;
           padding: 7rem 5.5% 3.2rem;
-          background:
-            radial-gradient(circle at 78% 42%, rgba(91, 58, 255, 0.42) 0 12%, transparent 34%),
-            radial-gradient(circle at 92% 80%, rgba(255, 50, 206, 0.26), transparent 28%),
-            radial-gradient(circle at 38% 35%, rgba(0, 100, 255, 0.16), transparent 30%),
-            linear-gradient(115deg, #03020a 0%, #050317 45%, #07011a 100%);
+          background: transparent;
         }
 
         .landing-hero::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(90deg, rgba(5, 2, 15, 0.86) 0%, rgba(5, 2, 15, 0.62) 44%, rgba(5, 2, 15, 0.18) 100%),
-            repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 110px);
-          pointer-events: none;
+          display: none;
         }
 
         .landing-glow {
@@ -692,9 +704,25 @@ export const Home: React.FC = () => {
         }
 
         .landing-courses {
+          position: relative;
+          z-index: 1;
           padding: 5rem 8%;
-          background: #f8fafc;
-          color: #0f172a;
+          overflow: hidden;
+          background: transparent;
+          color: white;
+        }
+
+        .landing-courses::before {
+          display: none;
+        }
+
+        .landing-courses::after {
+          display: none;
+        }
+
+        .landing-courses > * {
+          position: relative;
+          z-index: 1;
         }
 
         .landing-section-heading {
@@ -704,11 +732,11 @@ export const Home: React.FC = () => {
 
         .landing-section-heading h2 {
           font-size: 2.35rem;
-          color: #0f172a;
+          color: white;
         }
 
         .landing-section-heading p {
-          color: #64748b;
+          color: rgba(226, 232, 240, 0.82);
           margin-top: 0.5rem;
         }
 
@@ -720,52 +748,119 @@ export const Home: React.FC = () => {
 
         .landing-course-card {
           overflow: hidden;
-          border: 1px solid rgba(15, 23, 42, 0.08);
-          border-radius: 22px;
-          background: white;
-          box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+          display: flex;
+          flex-direction: column;
+          min-height: 100%;
+          border: 1px solid rgba(148, 210, 255, 0.2);
+          border-radius: 20px;
+          background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.045));
+          box-shadow: 0 24px 54px rgba(0, 0, 0, 0.32);
+          backdrop-filter: blur(16px);
+          transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .landing-course-card img {
+        .landing-course-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(46, 203, 255, 0.52);
+          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.34);
+        }
+
+        .landing-course-media {
+          position: relative;
+          height: 205px;
+          padding: 0.75rem;
+          background: linear-gradient(135deg, rgba(46, 203, 255, 0.08), rgba(183, 25, 255, 0.16));
+        }
+
+        .landing-course-media img {
           width: 100%;
-          height: 190px;
+          height: 100%;
           object-fit: cover;
           display: block;
+          border-radius: 14px;
+          border: 1px solid rgba(255,255,255,0.18);
         }
 
-        .landing-course-card > div {
+        .landing-course-media span {
+          position: absolute;
+          left: 1.15rem;
+          top: 1.15rem;
+          padding: 0.42rem 0.82rem;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #2ecbff, #274cff);
+          color: white;
+          font-size: 0.78rem;
+          font-weight: 900;
+          box-shadow: 0 10px 22px rgba(14, 165, 233, 0.32);
+        }
+
+        .landing-course-body {
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          gap: 0.85rem;
           padding: 1.4rem;
         }
 
         .landing-course-card h3 {
           font-size: 1.1rem;
-          margin-bottom: 0.5rem;
+          color: white;
+          line-height: 1.35;
+        }
+
+        .landing-course-card p {
+          flex: 1;
+          color: rgba(226, 232, 240, 0.78);
+          font-size: 0.9rem;
+          line-height: 1.55;
+        }
+
+        .landing-course-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem 1rem;
+          padding-top: 0.15rem;
+          color: rgba(226, 232, 240, 0.84);
+          font-size: 0.82rem;
+        }
+
+        .landing-course-meta span {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
         }
 
         .landing-course-footer {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-top: 1rem;
+          gap: 1rem;
+          margin-top: 0.25rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(226, 232, 240, 0.12);
         }
 
-        .landing-course-footer span {
+        .landing-course-footer > span {
           font-weight: 900;
-          color: #8b2cff;
+          color: #6ee7ff;
           font-size: 1.15rem;
+          white-space: nowrap;
         }
 
         .landing-course-footer button {
-          border: 1px solid #dbe3ef;
+          border: 1px solid rgba(255,255,255,0.16);
           border-radius: 999px;
-          background: white;
-          padding: 0.48rem 0.9rem;
-          color: #0f172a;
+          background: linear-gradient(135deg, #2ecbff, #274cff);
+          padding: 0.58rem 1rem;
+          color: white;
           cursor: pointer;
           font-weight: 800;
+          box-shadow: 0 12px 24px rgba(39, 76, 255, 0.28);
         }
 
         .landing-footer {
+          position: relative;
+          z-index: 2;
           background: #03020a;
           color: #94a3b8;
           padding: 3rem 5%;
@@ -835,8 +930,36 @@ export const Home: React.FC = () => {
         }
 
         @media (max-width: 760px) {
+          .landing-page,
+          .landing-hero,
+          .landing-courses,
+          .landing-footer {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: clip;
+          }
+
           .landing-header {
-            padding: 1rem 1.1rem;
+            width: 100%;
+            max-width: 100%;
+            padding: 0.75rem 1rem;
+            gap: 0.75rem;
+          }
+
+          .landing-brand {
+            width: min(150px, 48vw);
+            height: 48px;
+            flex-shrink: 1;
+          }
+
+          .landing-brand-logo,
+          .landing-header.is-scrolled .landing-brand-logo {
+            width: min(150px, 48vw);
+          }
+
+          .landing-header-actions {
+            flex-shrink: 0;
+            gap: 0.5rem;
           }
 
           .landing-login-button {
@@ -844,24 +967,58 @@ export const Home: React.FC = () => {
           }
 
           .landing-signup-button {
-            padding: 0.62rem 0.95rem;
+            min-height: 40px;
+            padding: 0.52rem 0.85rem;
+            font-size: 0.88rem;
+            white-space: nowrap;
           }
 
           .landing-hero {
-            padding: 5.8rem 1.1rem 2.5rem;
+            min-height: auto;
+            padding: 5.8rem 1rem 2.5rem;
+          }
+
+          .landing-grid {
+            width: 100%;
+            max-width: 100%;
+            min-height: auto;
+            margin: 0 auto;
+            justify-items: center;
+          }
+
+          .landing-copy {
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+          }
+
+          .landing-pill {
+            max-width: 100%;
+            margin: 0 auto;
+            gap: 0.4rem;
+            padding: 0.55rem 0.75rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.09em;
           }
 
           .landing-title {
-            font-size: clamp(2.85rem, 15vw, 4.2rem);
+            font-size: clamp(2.55rem, 13vw, 3.85rem);
+            letter-spacing: -0.04em;
           }
 
           .landing-subtitle {
+            max-width: 100%;
             font-size: 1rem;
+          }
+
+          .landing-cta-row {
+            width: 100%;
           }
 
           .landing-primary-cta,
           .landing-demo-cta {
             width: 100%;
+            padding: 0 1rem;
           }
 
           .landing-stats,
@@ -870,34 +1027,65 @@ export const Home: React.FC = () => {
             grid-template-columns: minmax(0, 1fr);
           }
 
+          .landing-stats {
+            width: 100%;
+            max-width: 360px;
+            margin-right: auto;
+            margin-left: auto;
+          }
+
+          .landing-stat {
+            justify-content: center;
+            text-align: left;
+          }
+
           .landing-visual {
-            min-height: 480px;
+            display: grid;
+            place-items: center;
+            width: 100%;
+            max-width: 100%;
+            min-height: auto;
+            padding-top: 1.5rem;
+            overflow: hidden;
           }
 
           .student-frame {
-            width: 100%;
-            height: 430px;
+            position: relative;
+            right: auto;
+            bottom: auto;
+            width: min(100%, 330px);
+            height: 360px;
+            margin: 4.25rem auto 0;
             border-radius: 28px;
+            transform: none;
           }
 
           .hero-orbit {
-            width: 340px;
-            height: 340px;
-            top: 16%;
+            left: 50%;
+            right: auto;
+            top: 5.5rem;
+            width: 280px;
+            height: 280px;
+            transform: translateX(-50%);
           }
 
           .trusted-card {
-            right: 0;
-            transform: scale(0.9);
-            transform-origin: top right;
+            top: 0;
+            right: auto;
+            left: 50%;
+            width: min(100%, 280px);
+            min-width: 0;
+            transform: translateX(-50%);
+            transform-origin: center top;
           }
 
           .earnings-card {
-            left: 0;
-            top: 38%;
-            width: 220px;
-            transform: scale(0.9);
-            transform-origin: left center;
+            left: 50%;
+            top: auto;
+            bottom: 1rem;
+            width: min(86%, 230px);
+            transform: translateX(-50%);
+            transform-origin: center bottom;
           }
 
           .float-badge {
@@ -906,7 +1094,61 @@ export const Home: React.FC = () => {
           }
 
           .float-cap {
-            left: 3%;
+            top: 6.5rem;
+            left: max(0.5rem, calc(50% - 155px));
+          }
+
+          .float-money {
+            top: 8.25rem;
+            right: max(0.5rem, calc(50% - 155px));
+          }
+
+          .float-star {
+            right: max(0.5rem, calc(50% - 160px));
+            bottom: 5.5rem;
+          }
+
+          .landing-courses,
+          .landing-footer {
+            padding-right: 1rem;
+            padding-left: 1rem;
+          }
+
+          .landing-section-heading h2 {
+            font-size: 2rem;
+          }
+
+          .landing-course-card,
+          .landing-footer-grid > div {
+            width: 100%;
+            max-width: 100%;
+          }
+
+          .landing-course-footer {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 0.9rem;
+          }
+
+          .landing-course-footer button {
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .landing-brand,
+          .landing-brand-logo,
+          .landing-header.is-scrolled .landing-brand-logo {
+            width: 128px;
+          }
+
+          .landing-signup-button {
+            padding-inline: 0.7rem;
+            font-size: 0.82rem;
+          }
+
+          .landing-title {
+            font-size: clamp(2.25rem, 12vw, 3.1rem);
           }
         }
       `}</style>

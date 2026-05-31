@@ -311,7 +311,9 @@ export const Register: React.FC = () => {
         .register-page {
           position: relative;
           min-height: 100vh;
-          overflow-x: hidden;
+          width: 100%;
+          max-width: 100%;
+          overflow-x: clip;
           background:
             radial-gradient(circle at 88% 13%, rgba(118, 52, 255, 0.18), transparent 30%),
             radial-gradient(circle at 8% 92%, rgba(0, 207, 255, 0.12), transparent 26%),
@@ -756,23 +758,74 @@ export const Register: React.FC = () => {
         }
 
         @media (max-width: 760px) {
+          .register-page {
+            overflow-x: clip;
+          }
+
           .register-layout {
-            width: min(100% - 2rem, 560px);
-            padding: 1.25rem 0 2rem;
+            width: 100%;
+            max-width: 560px;
+            padding: 1.25rem 1rem 2rem;
+            justify-items: center;
+            overflow-x: clip;
+          }
+
+          .register-showcase {
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
+          }
+
+          .register-back {
+            align-self: flex-start;
+          }
+
+          .register-brand {
+            width: min(230px, 78vw);
+            height: 68px;
+            margin-bottom: 2rem;
+          }
+
+          .register-brand img {
+            width: 100%;
+          }
+
+          .register-pill {
+            max-width: 100%;
+            padding: 0.6rem 0.8rem;
+            gap: 0.4rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.09em;
           }
 
           .register-showcase h1 {
-            font-size: 2.9rem;
+            max-width: 100%;
+            font-size: clamp(2.3rem, 12vw, 2.9rem);
+            letter-spacing: -0.035em;
+          }
+
+          .register-showcase > p {
+            max-width: 100%;
+            font-size: 1rem;
           }
 
           .register-metrics,
           .register-fields,
           .register-package-grid {
+            width: 100%;
             grid-template-columns: minmax(0, 1fr);
+          }
+
+          .register-metrics {
+            margin-top: 2rem;
+            padding-top: 0;
           }
 
           .register-package-card {
             grid-template-columns: 84px minmax(0, 1fr);
+            width: 100%;
+            max-width: 100%;
           }
 
           .register-package-card img {
@@ -781,11 +834,46 @@ export const Register: React.FC = () => {
           }
 
           .register-card {
+            width: 100%;
+            max-width: 100%;
             border-radius: 22px;
+            padding: 1.25rem;
+          }
+
+          .register-field > div,
+          .register-submit {
+            max-width: 100%;
+            min-width: 0;
+          }
+
+          .register-payment {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 0.8rem;
           }
 
           .register-login-link {
             flex-wrap: wrap;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .register-package-card {
+            grid-template-columns: 74px minmax(0, 1fr);
+            gap: 0.75rem;
+          }
+
+          .register-package-card img {
+            width: 74px;
+            height: 96px;
+          }
+
+          .register-package-card strong {
+            font-size: 0.96rem;
+          }
+
+          .register-package-card small {
+            font-size: 0.78rem;
           }
         }
       `}</style>
