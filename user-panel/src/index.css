@@ -75,6 +75,10 @@ button, input, select, textarea {
   font-size: inherit;
 }
 
+.my-courses-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
@@ -240,7 +244,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .dashboard-stats-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -285,7 +289,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .dashboard-stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem !important;
   }
 
@@ -300,10 +304,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .dashboard-stat-card-featured {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 
   .hide-mobile {
     display: none !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .my-courses-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
   }
 }
